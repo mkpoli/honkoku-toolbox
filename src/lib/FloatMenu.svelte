@@ -126,6 +126,11 @@ $effect(() => {
         <InsertButton color="green" text="〵" />
         <InsertButton color="green" text="〱" />
         <InsertButton color="green" text="〲" />
+        <h3>合字</h3>
+        <InsertButton color="green" text="〆" />
+        <InsertButton color="green" text=" ͡と" />
+        <InsertButton color="green" text="ヿ" />
+        <InsertButton color="green" text="ゟ" />
       </div>
       <div class="panel">
         <h3><button onclick={() => {
@@ -188,8 +193,7 @@ $effect(() => {
     background-color: #f5f5f5; /* Light grey background */
     padding: 0.25em 0;
     border: 1px solid #ccc;
-    margin: 0;
-    margin-bottom: 0.25em;
+    margin: 0.25em 0;
     /* margin-left: 0.25em; */
   }
 
