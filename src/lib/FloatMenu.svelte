@@ -15,6 +15,7 @@ const VARIANTS: { traditional: string; simplified: string; color: Color }[] = [
 	{ traditional: "槪", simplified: "概", color: "green" },
 	{ traditional: "者", simplified: "者", color: "red" },
 	{ traditional: "諸", simplified: "諸", color: "red" },
+	{ traditional: "著", simplified: "著", color: "red" },
 	{ traditional: "眞", simplified: "真", color: "blue" },
 	{ traditional: "顚", simplified: "顛", color: "blue" },
 	{ traditional: "敎", simplified: "教", color: "blue" },
