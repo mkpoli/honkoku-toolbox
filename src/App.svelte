@@ -28,20 +28,19 @@ setTimeout(() => {
 	}
 
 	if (platform === "honkoku") {
-		let textArea: HTMLTextAreaElement | undefined;
+		let kojiWrapper: HTMLDivElement | undefined;
 
-		const areas = document.getElementsByClassName("koji-editor-textarea");
-		if (areas.length > 0) {
-			textArea = areas[0] as HTMLTextAreaElement;
-			console.log("textArea", textArea);
+		const wrappers = document.getElementsByClassName("koji-editor");
+		if (wrappers.length > 0) {
+			kojiWrapper = wrappers[0] as HTMLDivElement;
 		}
-		if (!textArea) {
+		if (!kojiWrapper) {
 			let retries = 0;
 			const interval = setInterval(() => {
-				const areas = document.getElementsByClassName("koji-editor-textarea");
-				if (areas.length > 0) {
-					textArea = areas[0] as HTMLTextAreaElement;
-					editor = new KojiEditor(textArea);
+				const wrappers = document.getElementsByClassName("koji-editor");
+				if (wrappers.length > 0) {
+					kojiWrapper = wrappers[0] as HTMLDivElement;
+					editor = new KojiEditor(kojiWrapper);
 					clearInterval(interval);
 				}
 				if (retries > MAX_RETRIES) {
@@ -50,7 +49,7 @@ setTimeout(() => {
 				retries++;
 			}, 500);
 		} else {
-			editor = new KojiEditor(textArea);
+			editor = new KojiEditor(kojiWrapper);
 		}
 		return;
 	}

@@ -8,7 +8,13 @@ export interface Editor {
 }
 
 export class KojiEditor implements Editor {
-	constructor(private textarea: HTMLTextAreaElement) {
+	private textarea: HTMLTextAreaElement;
+	private wrapper: HTMLDivElement;
+
+	constructor(wrapper: HTMLDivElement) {
+		this.wrapper = wrapper;
+		const textarea = wrapper.querySelector("textarea");
+		if (!textarea) throw new Error("KojiEditor: textarea not found");
 		this.textarea = textarea;
 	}
 
@@ -44,7 +50,12 @@ export class KojiEditor implements Editor {
 	}
 
 	markText(text: string) {
-		(window as unknown as { find: (text: string) => void }).find(text);
+		const allChars = this.wrapper.querySelectorAll(".token .char");
+		for (const char of allChars) {
+			if (char.textContent === text) {
+				char.classList.add("highlight-variant");
+			}
+		}
 	}
 
 	get text() {
@@ -56,7 +67,7 @@ export class KojiEditor implements Editor {
 	}
 
 	toggleClass(className: string) {
-		this.textarea.classList.toggle(className);
+		this.wrapper.classList.toggle(className);
 	}
 }
 
