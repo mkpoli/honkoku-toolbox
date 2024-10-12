@@ -1,6 +1,6 @@
 <script lang="ts">
 import type { Editor } from "$lib/utils";
-import { CodeMirrorEditor, TextAreaEditor } from "$lib/utils";
+import { CodeMirrorEditor, KojiEditor } from "$lib/utils";
 import FloatMenu from "./lib/FloatMenu.svelte";
 
 const url = new URL(window.location.href);
@@ -41,7 +41,7 @@ setTimeout(() => {
 				const areas = document.getElementsByClassName("koji-editor-textarea");
 				if (areas.length > 0) {
 					textArea = areas[0] as HTMLTextAreaElement;
-					editor = new TextAreaEditor(textArea);
+					editor = new KojiEditor(textArea);
 					clearInterval(interval);
 				}
 				if (retries > MAX_RETRIES) {
@@ -50,7 +50,7 @@ setTimeout(() => {
 				retries++;
 			}, 500);
 		} else {
-			editor = new TextAreaEditor(textArea);
+			editor = new KojiEditor(textArea);
 		}
 		return;
 	}

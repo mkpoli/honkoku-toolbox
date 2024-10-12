@@ -7,7 +7,7 @@ export interface Editor {
 	toggleClass: (className: string) => void;
 }
 
-export class TextAreaEditor implements Editor {
+export class KojiEditor implements Editor {
 	constructor(private textarea: HTMLTextAreaElement) {
 		this.textarea = textarea;
 	}
