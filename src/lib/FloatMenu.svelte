@@ -30,7 +30,7 @@ editor.onchange(() => {
 
 $effect(() => {
 	for (const { simplified } of VARIANTS) {
-		if (editor.text.includes(simplified)) {
+		if (text.includes(simplified)) {
 			editor.markText(simplified);
 		}
 	}
