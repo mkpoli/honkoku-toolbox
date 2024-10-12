@@ -32,6 +32,7 @@ export default defineConfig({
 					"https://honkoku.org/app/",
 					"https://ja.wikisource.org/w/index.php?title=*&action=*",
 				],
+				license: "MIT",
 			},
 		}),
 	],
