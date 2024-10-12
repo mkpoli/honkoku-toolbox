@@ -130,8 +130,12 @@ $effect(() => {
         <h3>合字</h3>
         <InsertButton color="green" text="〆" />
         <InsertButton color="green" text=" ͡と" />
-        <InsertButton color="green" text="ヿ" />
         <InsertButton color="green" text="ゟ" />
+        <InsertButton color="green" text="𬼂" />
+        <InsertButton color="green" text="𬻿" />
+        <InsertButton color="green" text="ヿ" />
+        <InsertButton color="green" text="𪜈" />
+        <InsertButton color="green" text="𬼀" />
       </div>
       <div class="panel">
         <h3><button onclick={() => {
