@@ -4,7 +4,7 @@
   import { setContext } from 'svelte';
   import InsertButton from './InsertButton.svelte';
 
-  export let textArea: HTMLTextAreaElement;
+  let { textArea }: { textArea: HTMLTextAreaElement } = $props();
 
   setContext('textArea', textArea);
 

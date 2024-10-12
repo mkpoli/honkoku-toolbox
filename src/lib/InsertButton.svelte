@@ -4,16 +4,23 @@
 
   type Color = 'black' | 'green' | 'blue' | 'red' | 'pink' | 'gray';
 
-  export let color: Color = 'black';
-  export let text: string | ((orig: string) => string);
-  export let display: string = text instanceof Function ? text('…') : text;
+  let {
+    color = 'black',
+    text,
+    display = text instanceof Function ? text('…') : text,
+  }: {
+    color?: Color;
+    text: string | ((orig: string) => string);
+    display?: string;
+  } = $props();
+
   const textArea = getContext<HTMLTextAreaElement>('textArea');
   console.log('textArea', textArea);
 </script>
 
 <button
   data-color={color}
-  on:click={() => {
+  onclick={() => {
     if (textArea) {
       if (text instanceof Function) {
         repalceSelection(textArea, text);
