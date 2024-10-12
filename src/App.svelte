@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { Editor } from "$lib/utils";
-import { CodeMirrorEditor, KojiEditor } from "$lib/utils";
+import type { Editor } from "$lib/editor";
+import { CodeMirrorEditor, KojiEditor } from "$lib/editor";
 import FloatMenu from "./lib/FloatMenu.svelte";
 
 const url = new URL(window.location.href);
