@@ -1,28 +1,11 @@
 <script lang="ts">
   import { draggable } from '@neodrag/svelte';
-  import { insertAtCursor, repalceSelection } from '$lib/utils';
   import { setContext } from 'svelte';
   import InsertButton from './InsertButton.svelte';
 
   let { textArea }: { textArea: HTMLTextAreaElement } = $props();
 
   setContext('textArea', textArea);
-
-  function i(text: string) {
-    return () => {
-      if (textArea) {
-        insertAtCursor(textArea, text);
-      }
-    };
-  }
-
-  function r(repl: (orig: string) => string) {
-    return () => {
-      if (textArea) {
-        repalceSelection(textArea, repl);
-      }
-    };
-  }
 
   let shown = $state(false);
 </script>
