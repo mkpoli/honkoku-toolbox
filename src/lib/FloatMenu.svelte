@@ -4,7 +4,11 @@ import { draggable } from "@neodrag/svelte";
 import { setContext } from "svelte";
 import InsertButton from "./InsertButton.svelte";
 
-let { editor, platform }: { editor: Editor; platform: Platform } = $props();
+let {
+	editor,
+	platform,
+	showVariantKana = $bindable(false),
+}: { editor: Editor; platform: Platform; showVariantKana?: boolean } = $props();
 setContext("editor", editor);
 
 let shown = $state(false);
@@ -149,6 +153,7 @@ $effect(() => {
         <h3>其他</h3>
         <InsertButton color="green" display="◌゙" text="゙" />
         <InsertButton color="green" display="◌゚" text="゚" />
+        <button onclick={() => (showVariantKana = true)}>変体仮名</button>
       </div>
     </div>
   </div>
