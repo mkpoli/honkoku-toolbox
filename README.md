@@ -15,7 +15,7 @@
 
 ### インストール
 
-UserScript を入れてください。
+[Greasy Fork の URL](https://greasyfork.org/ja/scripts/512368-honkoku-toolbox/)からインストールするか、または GitHub の Release から UserScript を入れてください。具体的な指示は各サイトのリンク先を参照してください。
 
 ### 開く方法
 
