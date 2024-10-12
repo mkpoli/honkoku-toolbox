@@ -1,7 +1,6 @@
 .CodeMirror.display-variant-highlight .highlight-variant,
-.koji-editor.display-variant-highlight .token .char.highlight-variant {
+.editor-wrapper.display-variant-highlight .token .char.highlight-variant {
   color: #ff9800;
-  font-size: 1.2em;
   font-weight: bold;
 }
 
