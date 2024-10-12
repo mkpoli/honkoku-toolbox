@@ -1,6 +1,6 @@
 <script lang="ts">
   import { draggable } from '@neodrag/svelte';
-  import { TextAreaEditor, type Editor } from '$lib/utils';
+  import type { Editor } from '$lib/utils';
   import { setContext } from 'svelte';
   import InsertButton from './InsertButton.svelte';
 
