@@ -28,4 +28,4 @@ bun dev
 
 ## ライセンス
 
-[MIT](LICENSE) © mkpoli
+[MIT License](LICENSE) © 2023-2024 mkpoli
