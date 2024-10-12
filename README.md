@@ -9,7 +9,7 @@
 ## サポートされているサイト
 
 - [みんなで翻刻](https://honkoku.org/app/)
-<!-- - Wikisource -->
+- [日本語版Wikisource](https://ja.wikisource.org/)
 
 ## 使い方
 

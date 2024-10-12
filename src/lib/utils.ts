@@ -1,39 +1,49 @@
-export function insertAtCursor(textarea: HTMLTextAreaElement, textToInsert: string) {
-  // Get the current selection start and end
-  const startPos = textarea.selectionStart;
-  const endPos = textarea.selectionEnd;
-
-  // Insert the text at the current selection point
-  textarea.value = textarea.value.substring(0, startPos) + textToInsert + textarea.value.substring(endPos);
-
-  console.log('before', textarea.value);
-
-  // Update the cursor position to be at the end of the inserted text
-  textarea.selectionStart = textarea.selectionEnd = startPos + textToInsert.length;
-
-  console.log('after', textarea.value);
-
-  textarea.dispatchEvent(new Event('input'));
+export interface Editor {
+  insertAtCursor: (textToInsert: string) => void;
+  replaceSelection: (replacer: (text: string) => string) => void;
 }
 
-export function repalceSelection(textarea: HTMLTextAreaElement, replacer: (text: string) => string) {
-  // Get the current selection start and end
-  const startPos = textarea.selectionStart;
-  const endPos = textarea.selectionEnd;
+export class TextAreaEditor implements Editor {
+  constructor(private textarea: HTMLTextAreaElement) {
+    this.textarea = textarea;
+  }
 
-  console.log('before', textarea.value);
+  insertAtCursor(textToInsert: string) {
+    const startPos = this.textarea.selectionStart;
+    const endPos = this.textarea.selectionEnd;
 
-  // Insert the text at the current selection point
-  textarea.value =
-    textarea.value.substring(0, startPos) +
-    replacer(textarea.value.substring(startPos, endPos)) +
-    textarea.value.substring(endPos);
+    this.textarea.value = this.textarea.value.substring(0, startPos) + textToInsert + this.textarea.value.substring(endPos);
 
-  console.log('after', textarea.value);
+    this.textarea.selectionStart = this.textarea.selectionEnd = startPos + textToInsert.length;
 
-  // Update the cursor position to be at the end of the inserted text
-  textarea.selectionStart = textarea.selectionEnd =
-    startPos + replacer(textarea.value.substring(startPos, endPos)).length;
+    this.textarea.dispatchEvent(new Event('input'));
+  }
 
-  textarea.dispatchEvent(new Event('input'));
+  replaceSelection(replacer: (text: string) => string) {
+    const startPos = this.textarea.selectionStart;
+    const endPos = this.textarea.selectionEnd;
+
+    this.textarea.value = this.textarea.value.substring(0, startPos) + replacer(this.textarea.value.substring(startPos, endPos)) + this.textarea.value.substring(endPos);
+
+    this.textarea.selectionStart = this.textarea.selectionEnd = startPos + replacer(this.textarea.value.substring(startPos, endPos)).length;
+
+    this.textarea.dispatchEvent(new Event('input'));
+  }
+}
+
+export class CodeMirrorEditor implements Editor {
+  constructor(private codeMirror: CodeMirror.Editor) {
+    this.codeMirror = codeMirror;
+  }
+
+  insertAtCursor(textToInsert: string) {
+    const cursor = this.codeMirror.getCursor();
+    this.codeMirror.replaceRange(textToInsert, cursor);
+  }
+
+  replaceSelection(replacer: (text: string) => string) {
+    const selection = this.codeMirror.getSelection();
+    const replacedText = replacer(selection);
+    this.codeMirror.replaceSelection(replacedText);
+  }
 }

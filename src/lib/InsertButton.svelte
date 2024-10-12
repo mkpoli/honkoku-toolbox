@@ -1,6 +1,6 @@
 <script lang="ts">
   import { getContext } from 'svelte';
-  import { insertAtCursor, repalceSelection } from './utils';
+  import type { Editor } from './utils';
 
   type Color = 'black' | 'green' | 'blue' | 'red' | 'pink' | 'gray';
 
@@ -14,18 +14,17 @@
     display?: string;
   } = $props();
 
-  const textArea = getContext<HTMLTextAreaElement>('textArea');
-  console.log('textArea', textArea);
+  const editor = getContext<Editor>('editor');
 </script>
 
 <button
   data-color={color}
   onclick={() => {
-    if (textArea) {
+    if (editor) {
       if (text instanceof Function) {
-        repalceSelection(textArea, text);
+        editor.replaceSelection(text);
       } else {
-        insertAtCursor(textArea, text);
+        editor.insertAtCursor(text);
       }
     }
   }}>{display}</button

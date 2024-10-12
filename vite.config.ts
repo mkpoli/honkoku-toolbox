@@ -28,7 +28,7 @@ export default defineConfig({
       userscript: {
         icon: ICON_URL,
         namespace: 'https://mkpo.li/',
-        match: ['https://honkoku.org/app/'],
+        match: ['https://honkoku.org/app/', 'https://ja.wikisource.org/w/index.php?title=*&action=*'],
       },
     }),
   ],
