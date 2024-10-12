@@ -18,7 +18,7 @@
     <div class="panels">
       {#if platform === 'honkoku'}
         <div class="panel">
-          <h3>位置注</h3>
+          <h3>頁注</h3>
           <InsertButton color="green" text="【左頁】" />
           <InsertButton color="green" text="【左丁】" />
           <InsertButton color="green" text="【右頁】" />
@@ -86,6 +86,20 @@
         </div>
       {/if}
       <div class="panel">
+        <h3>踊字</h3>
+        <InsertButton color="green" text="々" />
+        <InsertButton color="green" text="ゝ" />
+        <InsertButton color="green" text="ゞ" />
+        <InsertButton color="green" text="ヽ" />
+        <InsertButton color="green" text="ヾ" />
+        <InsertButton color="green" text="〻" />
+        <InsertButton color="green" text="〳" />
+        <InsertButton color="green" text="〴" />
+        <InsertButton color="green" text="〵" />
+        <InsertButton color="green" text="〱" />
+        <InsertButton color="green" text="〲" />
+      </div>
+      <div class="panel">
         <h3>異體</h3>
         <InsertButton color="green" text="卽" display="卽=即" />
         <InsertButton color="green" text="旣" display="旣=既" />
@@ -114,14 +128,15 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #fff;
+    background-color: #fbfbfb;
     z-index: 100;
     padding: 0.5em;
-    gap: 0.25em;
+
+    font-size: 0.85rem;
 
     border-radius: 0.5em;
 
-    box-shadow: 0 0 1em #00000033;
+    box-shadow: 4px 4px 1em #00000033;
 
     display: grid;
     grid-template-columns: auto 1fr;
@@ -132,9 +147,6 @@
   .float-menu .dragger {
     padding: 0.25em;
     font-size: 1.5em;
-    /* width: 2em;
-    height: 3em; */
-    background-color: #fff;
     cursor: move;
   }
 
@@ -143,7 +155,7 @@
     padding: 0.5em 0.25em;
     border-radius: 5px; /* Optional: rounded corners */
     display: flex;
-    gap: 0.25em;
+    gap: 0;
 
     flex-wrap: wrap;
     border: none;
@@ -153,8 +165,8 @@
     background-color: #f5f5f5; /* Light grey background */
     padding: 0.25em 0;
     border: 1px solid #ccc;
-    border-radius: 0.5em;
     margin: 0;
+    margin-bottom: 0.25em;
     /* margin-left: 0.25em; */
   }
 
@@ -163,6 +175,10 @@
     text-align: center;
     display: flex;
     align-items: center;
+  }
+
+  .dragger:hover {
+    background-color: #f5f5f5;
   }
 
   .show-button {

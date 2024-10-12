@@ -33,8 +33,7 @@
 <style>
   button {
     padding: 0.5em 0.1em;
-    border-radius: 0.5em;
-    border: 1px solid #ccc;
+    border: 1px solid #bbb;
     background-color: #fff;
     cursor: pointer;
     display: flex;
