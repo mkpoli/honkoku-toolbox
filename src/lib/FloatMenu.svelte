@@ -11,7 +11,7 @@
 </script>
 
 {#if shown}
-  <div class="float-menu" use:draggable={{ handle: '.dragger' }}>
+  <div class="float-menu" use:draggable={{ handle: '.dragger', bounds: 'body' }}>
     <button class="dragger" title="ドラッグして移動、ダブルクリックして隠す" ondblclick={() => (shown = false)}>
       ⠿
     </button>
