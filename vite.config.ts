@@ -4,8 +4,13 @@ import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import monkey from 'vite-plugin-monkey';
 
+const ICON_URL = `data:image/png;base64,${readFileSync('./assets/honkoku.png').toString('base64')}`;
+
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    __ICON_URL__: JSON.stringify(ICON_URL),
+  },
   plugins: [
     svelte(),
     {
@@ -21,7 +26,7 @@ export default defineConfig({
     monkey({
       entry: 'src/main.ts',
       userscript: {
-        icon: `data:image/png;base64,${readFileSync('./assets/honkoku.png').toString('base64')}`,
+        icon: ICON_URL,
         namespace: 'https://mkpo.li/',
         match: ['https://honkoku.org/app/'],
       },
