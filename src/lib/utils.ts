@@ -76,17 +76,27 @@ export class CodeMirrorEditor implements Editor {
 		this.codeMirror.replaceSelection(replacedText);
 	}
 
-	markText(text: string) {
-		const textIndex = this.text.indexOf(text);
-		const textPos = this.codeMirror.posFromIndex(textIndex);
+	markText(substr: string) {
+		if (!substr || !this.text.includes(substr)) return;
 
-		this.codeMirror.markText(
-			textPos,
-			this.codeMirror.posFromIndex(textIndex + text.length),
-			{
-				className: "highlight-variant",
-			},
-		);
+		const occurrences = [];
+		let index = this.text.indexOf(substr);
+		while (index !== -1) {
+			occurrences.push(index);
+			index = this.text.indexOf(substr, index + 1);
+		}
+
+		for (const index of occurrences) {
+			const textPos = this.codeMirror.posFromIndex(index);
+
+			this.codeMirror.markText(
+				textPos,
+				this.codeMirror.posFromIndex(index + substr.length),
+				{
+					className: "highlight-variant",
+				},
+			);
+		}
 	}
 
 	get text() {

@@ -32,7 +32,6 @@ $effect(() => {
 	for (const { simplified } of VARIANTS) {
 		if (editor.text.includes(simplified)) {
 			editor.markText(simplified);
-			break;
 		}
 	}
 });
