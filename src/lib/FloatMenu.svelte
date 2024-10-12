@@ -108,13 +108,14 @@
         <h3>異體</h3>
         <InsertButton color="green" text="卽" display="卽=即" />
         <InsertButton color="green" text="旣" display="旣=既" />
-        <InsertButton color="green" text="者" display="者=者" />
-        <InsertButton color="green" text="諸" display="諸=諸" />
-        <InsertButton color="green" text="眞" display="眞=真" />
-        <InsertButton color="green" text="顚" display="顚=顛" />
-        <InsertButton color="green" text="敎" display="敎=教" />
-        <InsertButton color="green" text="神" display="神=神" />
-        <InsertButton color="green" text="硏" display="硏=研" />
+        <InsertButton color="green" text="槪" display="槪=概" />
+        <InsertButton color="red" text="者" display="者=者" />
+        <InsertButton color="red" text="諸" display="諸=諸" />
+        <InsertButton color="blue" text="眞" display="眞=真" />
+        <InsertButton color="blue" text="顚" display="顚=顛" />
+        <InsertButton color="blue" text="敎" display="敎=教" />
+        <InsertButton color="blue" text="神" display="神=神" />
+        <InsertButton color="blue" text="硏" display="硏=研" />
       </div>
     </div>
   </div>
