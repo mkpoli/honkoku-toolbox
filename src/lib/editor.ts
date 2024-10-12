@@ -5,6 +5,7 @@ export interface Editor {
 	text: string;
 	onchange: (callback: () => void) => void;
 	toggleClass: (className: string) => void;
+	selectedText: string;
 }
 
 interface TsrcEditorRaw {
@@ -42,9 +43,7 @@ export class KojiEditor implements Editor {
 	}
 
 	replaceSelection(replacer: (text: string) => string) {
-		const { start, end } = this.editor.selection;
-		const substr = this.text.substring(start, end);
-		this.editor.insertOrReplace(replacer(substr));
+		this.editor.insertOrReplace(replacer(this.selectedText));
 	}
 
 	markText(text: string) {
@@ -68,6 +67,11 @@ export class KojiEditor implements Editor {
 	toggleClass(className: string) {
 		this.wrapper.classList.toggle(className);
 	}
+
+	get selectedText() {
+		const { start, end } = this.editor.selection;
+		return this.text.substring(start, end);
+	}
 }
 
 export class CodeMirrorEditor implements Editor {
@@ -85,8 +89,7 @@ export class CodeMirrorEditor implements Editor {
 	}
 
 	replaceSelection(replacer: (text: string) => string) {
-		const selection = this.codeMirror.getSelection();
-		const replacedText = replacer(selection);
+		const replacedText = replacer(this.selectedText);
 		this.codeMirror.replaceSelection(replacedText);
 	}
 
@@ -123,5 +126,9 @@ export class CodeMirrorEditor implements Editor {
 
 	toggleClass(className: string) {
 		this.codeMirror.getWrapperElement().classList.toggle(className);
+	}
+
+	get selectedText() {
+		return this.codeMirror.getSelection();
 	}
 }
