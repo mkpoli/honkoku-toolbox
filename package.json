@@ -1,25 +1,28 @@
 {
-  "name": "honkoku-toolbox",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
-  },
-  "devDependencies": {
-    "@neodrag/svelte": "^2.0.6",
-    "@sveltejs/vite-plugin-svelte": "^4.0.0-next.6",
-    "@tsconfig/svelte": "^5.0.4",
-    "@types/codemirror": "^5.60.15",
-    "svelte": "^5.0.0-next.264",
-    "svelte-check": "^4.0.5",
-    "svelte-preprocess": "^6.0.3",
-    "tslib": "^2.7.0",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.8",
-    "vite-plugin-monkey": "^4.0.6"
-  }
+	"name": "honkoku-toolbox",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"format": "biome format --write .",
+		"lint": "biome lint --write ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.3",
+		"@neodrag/svelte": "^2.0.6",
+		"@sveltejs/vite-plugin-svelte": "^4.0.0-next.6",
+		"@tsconfig/svelte": "^5.0.4",
+		"@types/codemirror": "^5.60.15",
+		"svelte": "^5.0.0-next.264",
+		"svelte-check": "^4.0.5",
+		"svelte-preprocess": "^6.0.3",
+		"tslib": "^2.7.0",
+		"typescript": "^5.6.3",
+		"vite": "^5.4.8",
+		"vite-plugin-monkey": "^4.0.6"
+	}
 }
