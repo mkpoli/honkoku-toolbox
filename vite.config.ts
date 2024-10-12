@@ -1,3 +1,5 @@
+import { readFileSync } from 'fs';
+
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import monkey from 'vite-plugin-monkey';
@@ -19,7 +21,7 @@ export default defineConfig({
     monkey({
       entry: 'src/main.ts',
       userscript: {
-        icon: 'https://honkoku.org/app/img/03_star.c7086321.png',
+        icon: `data:image/png;base64,${readFileSync('./assets/honkoku.png').toString('base64')}`,
         namespace: 'https://mkpo.li/',
         match: ['https://honkoku.org/app/'],
       },
