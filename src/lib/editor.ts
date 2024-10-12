@@ -76,8 +76,12 @@ export class CodeMirrorEditor implements Editor {
 	}
 
 	insertAtCursor(textToInsert: string) {
-		const cursor = this.codeMirror.getCursor();
-		this.codeMirror.replaceRange(textToInsert, cursor);
+		if (this.codeMirror.somethingSelected()) {
+			this.replaceSelection((_) => textToInsert);
+		} else {
+			const cursor = this.codeMirror.getCursor();
+			this.codeMirror.replaceRange(textToInsert, cursor);
+		}
 	}
 
 	replaceSelection(replacer: (text: string) => string) {
