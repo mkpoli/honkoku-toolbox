@@ -7,46 +7,44 @@ export interface Editor {
 	toggleClass: (className: string) => void;
 }
 
+interface TsrcEditorRaw {
+	value: string;
+	selection: {
+		start: number;
+		end: number;
+	};
+	markup: (pre: string, post: string) => void;
+	insertOrReplace: (replacer: string) => void;
+	watch: <T>(state: string, handler: (state: T) => void) => void;
+}
+
 export class KojiEditor implements Editor {
-	private textarea: HTMLTextAreaElement;
-	private wrapper: HTMLDivElement;
+	private wrapper: HTMLDivElement & {
+		__vue__: {
+			editor: TsrcEditorRaw;
+		};
+	};
+
+	private editor: TsrcEditorRaw;
 
 	constructor(wrapper: HTMLDivElement) {
-		this.wrapper = wrapper;
-		const textarea = wrapper.querySelector("textarea");
-		if (!textarea) throw new Error("KojiEditor: textarea not found");
-		this.textarea = textarea;
+		this.wrapper = wrapper as HTMLDivElement & {
+			__vue__: { editor: TsrcEditorRaw };
+		};
+		if (!this.wrapper.__vue__) {
+			throw new Error("KojiEditor: wrapper is not a Vue component");
+		}
+		this.editor = this.wrapper.__vue__.editor;
 	}
 
 	insertAtCursor(textToInsert: string) {
-		const startPos = this.textarea.selectionStart;
-		const endPos = this.textarea.selectionEnd;
-
-		this.textarea.value =
-			this.textarea.value.substring(0, startPos) +
-			textToInsert +
-			this.textarea.value.substring(endPos);
-
-		this.textarea.selectionStart = this.textarea.selectionEnd =
-			startPos + textToInsert.length;
-
-		this.textarea.dispatchEvent(new Event("input"));
+		this.editor.insertOrReplace(textToInsert);
 	}
 
 	replaceSelection(replacer: (text: string) => string) {
-		const startPos = this.textarea.selectionStart;
-		const endPos = this.textarea.selectionEnd;
-
-		this.textarea.value =
-			this.textarea.value.substring(0, startPos) +
-			replacer(this.textarea.value.substring(startPos, endPos)) +
-			this.textarea.value.substring(endPos);
-
-		this.textarea.selectionStart = this.textarea.selectionEnd =
-			startPos +
-			replacer(this.textarea.value.substring(startPos, endPos)).length;
-
-		this.textarea.dispatchEvent(new Event("input"));
+		const { start, end } = this.editor.selection;
+		const substr = this.text.substring(start, end);
+		this.editor.insertOrReplace(replacer(substr));
 	}
 
 	markText(text: string) {
@@ -59,11 +57,12 @@ export class KojiEditor implements Editor {
 	}
 
 	get text() {
-		return this.textarea.value;
+		return this.editor.value;
 	}
 
 	onchange(callback: () => void) {
-		this.textarea.addEventListener("input", callback);
+		// this.textarea.addEventListener("input", callback);
+		this.editor.watch("requestedSrc", callback);
 	}
 
 	toggleClass(className: string) {

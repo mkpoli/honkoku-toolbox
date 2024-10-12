@@ -30,14 +30,14 @@ setTimeout(() => {
 	if (platform === "honkoku") {
 		let kojiWrapper: HTMLDivElement | undefined;
 
-		const wrappers = document.getElementsByClassName("koji-editor");
+		const wrappers = document.getElementsByClassName("editor-wrapper");
 		if (wrappers.length > 0) {
 			kojiWrapper = wrappers[0] as HTMLDivElement;
 		}
 		if (!kojiWrapper) {
 			let retries = 0;
 			const interval = setInterval(() => {
-				const wrappers = document.getElementsByClassName("koji-editor");
+				const wrappers = document.getElementsByClassName("editor-wrapper");
 				if (wrappers.length > 0) {
 					kojiWrapper = wrappers[0] as HTMLDivElement;
 					editor = new KojiEditor(kojiWrapper);
