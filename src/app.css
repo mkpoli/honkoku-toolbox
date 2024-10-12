@@ -1,3 +1,9 @@
+.CodeMirror.display-variant-highlight .highlight-variant {
+  color: #ff9800;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 /* .koji-editor-display {
   font-family: 'I.Ngaan', serif;
 } */

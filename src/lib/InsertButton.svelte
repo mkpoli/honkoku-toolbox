@@ -2,8 +2,6 @@
 import { getContext } from "svelte";
 import type { Editor } from "./utils";
 
-type Color = "black" | "green" | "blue" | "red" | "pink" | "gray";
-
 let {
 	color = "black",
 	text,

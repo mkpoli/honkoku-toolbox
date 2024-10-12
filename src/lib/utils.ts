@@ -1,6 +1,10 @@
 export interface Editor {
 	insertAtCursor: (textToInsert: string) => void;
 	replaceSelection: (replacer: (text: string) => string) => void;
+	markText: (text: string) => void;
+	text: string;
+	onchange: (callback: () => void) => void;
+	toggleClass: (className: string) => void;
 }
 
 export class TextAreaEditor implements Editor {
@@ -38,6 +42,22 @@ export class TextAreaEditor implements Editor {
 
 		this.textarea.dispatchEvent(new Event("input"));
 	}
+
+	markText(text: string) {
+		(window as unknown as { find: (text: string) => void }).find(text);
+	}
+
+	get text() {
+		return this.textarea.value;
+	}
+
+	onchange(callback: () => void) {
+		this.textarea.addEventListener("input", callback);
+	}
+
+	toggleClass(className: string) {
+		this.textarea.classList.toggle(className);
+	}
 }
 
 export class CodeMirrorEditor implements Editor {
@@ -54,5 +74,30 @@ export class CodeMirrorEditor implements Editor {
 		const selection = this.codeMirror.getSelection();
 		const replacedText = replacer(selection);
 		this.codeMirror.replaceSelection(replacedText);
+	}
+
+	markText(text: string) {
+		const textIndex = this.text.indexOf(text);
+		const textPos = this.codeMirror.posFromIndex(textIndex);
+
+		this.codeMirror.markText(
+			textPos,
+			this.codeMirror.posFromIndex(textIndex + text.length),
+			{
+				className: "highlight-variant",
+			},
+		);
+	}
+
+	get text() {
+		return this.codeMirror.getValue();
+	}
+
+	onchange(callback: () => void) {
+		this.codeMirror.on("change", callback);
+	}
+
+	toggleClass(className: string) {
+		this.codeMirror.getWrapperElement().classList.toggle(className);
 	}
 }
