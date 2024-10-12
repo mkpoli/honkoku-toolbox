@@ -5,4 +5,4 @@
 //// <reference types="vite-plugin-monkey/global" />
 declare const __ICON_URL__: string;
 
-type Platform = 'honkoku' | 'wikisource';
+type Platform = "honkoku" | "wikisource";

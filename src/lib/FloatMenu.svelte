@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { draggable } from '@neodrag/svelte';
-  import type { Editor } from '$lib/utils';
-  import { setContext } from 'svelte';
-  import InsertButton from './InsertButton.svelte';
+import type { Editor } from "$lib/utils";
+import { draggable } from "@neodrag/svelte";
+import { setContext } from "svelte";
+import InsertButton from "./InsertButton.svelte";
 
-  let { editor, platform }: { editor: Editor; platform: Platform } = $props();
-  setContext('editor', editor);
+let { editor, platform }: { editor: Editor; platform: Platform } = $props();
+setContext("editor", editor);
 
-  let shown = $state(false);
+let shown = $state(false);
 </script>
 
 {#if shown}
@@ -51,7 +51,7 @@
         </div>
         <div class="panel">
           <h3>返点</h3>
-  
+
           <InsertButton color="red" text="＿レ" display="レ" />
           <InsertButton color="blue" text="＿一" display="一" />
           <InsertButton color="blue" text="＿二" display="二" />

@@ -1,20 +1,20 @@
 <script lang="ts">
-  import { getContext } from 'svelte';
-  import type { Editor } from './utils';
+import { getContext } from "svelte";
+import type { Editor } from "./utils";
 
-  type Color = 'black' | 'green' | 'blue' | 'red' | 'pink' | 'gray';
+type Color = "black" | "green" | "blue" | "red" | "pink" | "gray";
 
-  let {
-    color = 'black',
-    text,
-    display = text instanceof Function ? text('…') : text,
-  }: {
-    color?: Color;
-    text: string | ((orig: string) => string);
-    display?: string;
-  } = $props();
+let {
+	color = "black",
+	text,
+	display = text instanceof Function ? text("…") : text,
+}: {
+	color?: Color;
+	text: string | ((orig: string) => string);
+	display?: string;
+} = $props();
 
-  const editor = getContext<Editor>('editor');
+const editor = getContext<Editor>("editor");
 </script>
 
 <button
