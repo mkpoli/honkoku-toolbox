@@ -9,7 +9,8 @@
 		"preview": "vite preview",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"format": "biome format --write .",
-		"lint": "biome lint --write ."
+		"lint": "biome lint --write .",
+		"version": "bumpp-version"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.3",
@@ -17,6 +18,7 @@
 		"@sveltejs/vite-plugin-svelte": "^4.0.0-next.6",
 		"@tsconfig/svelte": "^5.0.4",
 		"@types/codemirror": "^5.60.15",
+		"bumpp-version": "^1.0.2",
 		"svelte": "^5.0.0-next.264",
 		"svelte-check": "^4.0.5",
 		"svelte-preprocess": "^6.0.3",

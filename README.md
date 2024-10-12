@@ -9,7 +9,7 @@
 ## サポートされているサイト
 
 - [みんなで翻刻](https://honkoku.org/app/)
-- [日本語版Wikisource](https://ja.wikisource.org/)
+- [日本語版 Wikisource](https://ja.wikisource.org/)
 
 ## 使い方
 
@@ -27,10 +27,16 @@ UserScript を入れてください。
 
 ## 開発
 
-```
+```bash
 bun i
 bun dev
 ```
+
+### リリース
+
+1. `bun run version`でバージョンを上げてタグコミットを作成しプッシュする。
+2. GitHub Actions がビルドを行い、リリースページが自動的に作成されるのを待つ。
+3. GreasyFork などの UserScript 共有サイトでリリースする。
 
 ## ライセンス
 
