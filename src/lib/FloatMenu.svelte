@@ -145,6 +145,11 @@ $effect(() => {
           <InsertButton color={color} text={traditional} display={`${traditional}=${simplified}`} />
         {/each}
       </div>
+      <div class="panel">
+        <h3>其他</h3>
+        <InsertButton color="green" display="◌゙" text="゙" />
+        <InsertButton color="green" display="◌゚" text="゚" />
+      </div>
     </div>
   </div>
 {:else}
