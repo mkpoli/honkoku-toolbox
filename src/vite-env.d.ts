@@ -6,4 +6,3 @@
 declare const __ICON_URL__: string;
 
 type Platform = "honkoku" | "wikisource";
-type Color = "black" | "green" | "blue" | "red" | "pink" | "gray";

@@ -3,6 +3,7 @@ import type { Editor } from "$lib/editor";
 import { draggable } from "@neodrag/svelte";
 import { setContext } from "svelte";
 import InsertButton from "./InsertButton.svelte";
+import type { Color } from "./color";
 
 let {
 	editor,
