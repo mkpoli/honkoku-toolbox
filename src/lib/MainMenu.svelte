@@ -161,6 +161,8 @@ $effect(() => {
           <InsertButton color="green" text={(t) => `{{傍点|style=open double-circle|${t}}}`} display="◎" title="傍点（白二重丸）" />
           <InsertButton color="green" text={(t) => `{{傍点|style=filled triangle|${t}}}`} display="▲" title="傍点（黒三角）" />
           <InsertButton color="green" text={(t) => `{{傍点|style=open triangle|${t}}}`} display="△" title="傍点（白三角）" />
+          <h3>ルビー</h3>
+          <InsertButton color="pink" text={(t) => `{{ruby|${t}|}}`} display="ルビ" />
         </div>
       {/if}
       <div class="panel">
