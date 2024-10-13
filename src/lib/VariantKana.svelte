@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Editor } from "$lib/editor";
 import { setContext } from "svelte";
-import KanaButton from "./KanaButton.svelte";
-import FloatDialog from "./ui/FloatDialog.svelte";
+import KanaButton from "$lib/buttons/KanaButton.svelte";
+import FloatDialog from "$lib/ui/FloatDialog.svelte";
 
 let { editor, shown = $bindable(false) }: { editor: Editor; shown?: boolean } =
 	$props();

@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { Editor } from "$lib/editor";
 import { setContext } from "svelte";
-import InsertButton from "./InsertButton.svelte";
+import InsertButton from "$lib/buttons/InsertButton.svelte";
 import { GM } from "$";
-import type { Color } from "./color";
-import CustomInsertButton from "./CustomInsertButton.svelte";
-import InsertButtonEdit from "./InsertButtonEdit.svelte";
-import FloatDialog from "./ui/FloatDialog.svelte";
+import type { Color } from "$lib/color";
+import CustomInsertButton from "$lib/buttons/CustomInsertButton.svelte";
+import InsertButtonEdit from "$lib/buttons/InsertButtonEdit.svelte";
+import FloatDialog from "$lib/ui/FloatDialog.svelte";
 
 let {
 	editor,

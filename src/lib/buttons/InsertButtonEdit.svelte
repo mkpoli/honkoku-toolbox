@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Color } from "./color";
+import type { Color } from "$lib/color";
 
 let {
 	color = "black",

@@ -1,7 +1,7 @@
 <script lang="ts">
 import InsertButton from "./InsertButton.svelte";
 import InsertButtonEdit from "./InsertButtonEdit.svelte";
-import type { Color } from "./color";
+import type { Color } from "$lib/color";
 
 let {
 	color = "black",

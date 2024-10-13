@@ -1,6 +1,6 @@
 <script lang="ts">
 import { getContext, onMount } from "svelte";
-import type { Editor } from "./editor";
+import type { Editor } from "$lib/editor";
 import tippy, { type Instance as TippyInstance } from "tippy.js";
 let {
 	display,

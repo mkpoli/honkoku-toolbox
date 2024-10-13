@@ -1,7 +1,7 @@
 <script lang="ts">
 import { getContext } from "svelte";
-import type { Editor } from "./editor";
-import type { Color } from "./color";
+import type { Editor } from "$lib/editor";
+import type { Color } from "$lib/color";
 
 let {
 	color = "black",
