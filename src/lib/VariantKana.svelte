@@ -77,24 +77,42 @@ editor.onchange(() => {
 </script> 
 
 <FloatDialog bind:shown>
-  <div class="kana-table">
-    {#each KANA_TABLE as k}
-      {#if k}
-        {@const [kana, variants] = k}
-      <div class="row">
-        <KanaButton display={kana} variants={variants} />
-        </div>
-      {:else}
-        <div class="row"></div>
-      {/if}
-    {/each}
-  </div>
+	<div class="container">
+		<h2>変体仮名</h2>
+		<div class="kana-table">
+			{#each KANA_TABLE as k}
+				{#if k}
+					{@const [kana, variants] = k}
+				<div class="row">
+					<KanaButton display={kana} variants={variants} />
+					</div>
+				{:else}
+					<div class="row"></div>
+				{/if}
+			{/each}
+		</div>
+	</div>
 </FloatDialog>
 
 <style>
   .kana-table {
+		padding: 0.25em;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 0.25em;
   }
+
+	h2 {
+		margin: 0;
+		border: none;
+		font-size: 1.25em;
+		font-family: inherit;
+		width: 100%;
+		text-align: center;
+	}
+
+	.container {
+		display: flex;
+		flex-direction: column;
+	}
 </style>

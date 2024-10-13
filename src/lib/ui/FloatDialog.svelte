@@ -23,7 +23,6 @@ let {
     background-color: #fbfbfb;
     z-index: 100;
     padding: 0.5em;
-    gap: 0.5em;
 
     font-size: 0.85rem;
 

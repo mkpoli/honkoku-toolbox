@@ -241,7 +241,7 @@ $effect(() => {
 <style>
   .panel {
     border: 1px solid #ccc; /* Light grey border */
-    padding: 0.5em 0.25em;
+    padding: 0.25em;
     border-radius: 5px; /* Optional: rounded corners */
     display: flex;
     gap: 0;
