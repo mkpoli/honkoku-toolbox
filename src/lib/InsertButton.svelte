@@ -7,11 +7,13 @@ let {
 	color = "black",
 	text,
 	display = text instanceof Function ? text("…") : text,
+	title,
 	oncontextmenu,
 }: {
 	color?: Color;
 	text: string | ((orig: string) => string);
 	display?: string;
+	title?: string;
 	oncontextmenu?: (e: MouseEvent) => void;
 } = $props();
 
@@ -20,6 +22,7 @@ const editor = getContext<Editor>("editor");
 
 <button
   data-color={color}
+  title={title}
   onclick={() => {
     if (editor) {
       if (text instanceof Function) {

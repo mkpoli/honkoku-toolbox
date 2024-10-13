@@ -151,6 +151,21 @@ $effect(() => {
           <InsertButton color="red" text={(t) => `【${t}】`} display="注釈" />
         </div>
       {/if}
+      {#if platform === 'wikisource'}
+        <div class="panel">
+          <h3>傍点</h3>
+          <InsertButton color="green" text={(t) => `{{傍点|style=filled sesame|${t}}}`} display="﹅" title="傍点（黒ゴマ）" />
+          <InsertButton color="green" text={(t) => `{{傍点|style=open sesame|${t}}}`} display="﹆" title="傍点（白ゴマ）" />
+          <InsertButton color="green" text={(t) => `{{傍点|style=filled dot|${t}}}`} display="•" title="傍点（黒点）" />
+          <InsertButton color="green" text={(t) => `{{傍点|style=open dot|${t}}}`} display="◦" title="傍点（白点）" />
+          <InsertButton color="green" text={(t) => `{{傍点|style=filled circle|${t}}}`} display="●" title="傍点（黒丸）" />
+          <InsertButton color="green" text={(t) => `{{傍点|style=open circle|${t}}}`} display="○" title="傍点（白丸）" />
+          <InsertButton color="green" text={(t) => `{{傍点|style=filled double-circle|${t}}}`} display="◉" title="傍点（黒二重丸）" />
+          <InsertButton color="green" text={(t) => `{{傍点|style=open double-circle|${t}}}`} display="◎" title="傍点（白二重丸）" />
+          <InsertButton color="green" text={(t) => `{{傍点|style=filled triangle|${t}}}`} display="▲" title="傍点（黒三角）" />
+          <InsertButton color="green" text={(t) => `{{傍点|style=open triangle|${t}}}`} display="△" title="傍点（白三角）" />
+        </div>
+      {/if}
       <div class="panel">
         <h3>踊字</h3>
         <InsertButton color="green" text="々" />
