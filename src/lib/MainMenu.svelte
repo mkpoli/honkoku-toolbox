@@ -204,7 +204,7 @@ $effect(() => {
         }}>カスタム</button>
         {#if editingCustom}
           <InsertButtonEdit
-            color="black"
+            color={customColor}
             text={customText}
             display={customDisplay}
             onedit={(color, text, display) => {
