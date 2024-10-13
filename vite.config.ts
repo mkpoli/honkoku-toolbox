@@ -34,6 +34,7 @@ export default defineConfig({
 				],
 				license: "MIT",
 				grant: ["GM.setValue", "GM.getValue"],
+				description: "日本の古典籍を翻刻する際の便利ツール",
 			},
 		}),
 	],
