@@ -76,11 +76,7 @@ editor.onchange(() => {
 });
 </script> 
 
-<div class="float-menu" use:draggable={{ handle: '.dragger', bounds: 'body' }}>
-  <button class="dragger" title="ドラッグして移動、ダブルクリックして隠す" ondblclick={() => (shown = false)}>
-    ⠿
-  </button>
-
+<div class="float-menu" use:draggable={{ bounds: 'body' }} role="dialog" title="ドラッグして移動、ダブルクリックして隠す" ondblclick={() => (shown = false)}>
   <div class="kana-table">
     {#each KANA_TABLE as k}
       {#if k}
@@ -119,24 +115,8 @@ editor.onchange(() => {
     grid-template-columns: auto 1fr;
 
     user-select: none;
-  }
 
-  .float-menu .dragger {
-    padding: 0.25em;
-    font-size: 1.5em;
-    cursor: move;
-  }
-
-  .dragger {
-    vertical-align: middle;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    height: 1em;
-  }
-
-  .dragger:hover {
-    background-color: #f5f5f5;
+		cursor: move;
   }
 
   .kana-table {

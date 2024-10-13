@@ -77,10 +77,7 @@ $effect(() => {
 </script>
 
 {#if shown}
-  <div class="float-menu" use:draggable={{ handle: '.dragger', bounds: 'body' }}>
-    <button class="dragger" title="ドラッグして移動、ダブルクリックして隠す" ondblclick={() => (shown = false)}>
-      ⠿
-    </button>
+  <div class="float-menu" use:draggable={{ bounds: 'body' }} ondblclick={() => (shown = false)} role="dialog" title="ドラッグして移動、ダブルクリックして隠す">
     <div class="panels">
       {#if platform === 'honkoku'}
         <div class="panel">
@@ -263,11 +260,6 @@ $effect(() => {
     grid-template-columns: auto 1fr;
 
     user-select: none;
-  }
-
-  .float-menu .dragger {
-    padding: 0.25em;
-    font-size: 1.5em;
     cursor: move;
   }
 
@@ -288,17 +280,6 @@ $effect(() => {
     border: 1px solid #ccc;
     margin: 0.25em 0;
     /* margin-left: 0.25em; */
-  }
-
-  .dragger {
-    vertical-align: middle;
-    text-align: center;
-    display: flex;
-    align-items: center;
-  }
-
-  .dragger:hover {
-    background-color: #f5f5f5;
   }
 
   .show-button {

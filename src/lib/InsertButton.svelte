@@ -23,7 +23,8 @@ const editor = getContext<Editor>("editor");
 <button
   data-color={color}
   title={title}
-  onclick={() => {
+  onclick={(e) => {
+    e.stopPropagation();
     if (editor) {
       if (text instanceof Function) {
         editor.replaceSelection(text);
