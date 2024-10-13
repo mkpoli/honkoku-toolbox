@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { Editor } from "$lib/editor";
-import { draggable } from "@neodrag/svelte";
 import { setContext } from "svelte";
 import KanaButton from "./KanaButton.svelte";
+import FloatDialog from "./ui/FloatDialog.svelte";
 
 let { editor, shown = $bindable(false) }: { editor: Editor; shown?: boolean } =
 	$props();
@@ -76,7 +76,7 @@ editor.onchange(() => {
 });
 </script> 
 
-<div class="float-menu" use:draggable={{ bounds: 'body' }} role="dialog" title="ドラッグして移動、ダブルクリックして隠す" ondblclick={() => (shown = false)}>
+<FloatDialog bind:shown>
   <div class="kana-table">
     {#each KANA_TABLE as k}
       {#if k}
@@ -89,36 +89,9 @@ editor.onchange(() => {
       {/if}
     {/each}
   </div>
-
-</div>
+</FloatDialog>
 
 <style>
-  .float-menu {
-    writing-mode: vertical-rl;
-
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #fbfbfb;
-    z-index: 100;
-    padding: 0.5em;
-    gap: 0.5em;
-
-    font-size: 0.85rem;
-
-    border-radius: 0.5em;
-
-    box-shadow: 4px 4px 1em #00000033;
-
-    display: grid;
-    grid-template-columns: auto 1fr;
-
-    user-select: none;
-
-		cursor: move;
-  }
-
   .kana-table {
     display: grid;
     grid-template-columns: repeat(5, 1fr);

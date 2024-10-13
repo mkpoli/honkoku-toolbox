@@ -1,12 +1,12 @@
 <script lang="ts">
 import type { Editor } from "$lib/editor";
-import { draggable } from "@neodrag/svelte";
 import { setContext } from "svelte";
 import InsertButton from "./InsertButton.svelte";
 import { GM } from "$";
 import type { Color } from "./color";
 import CustomInsertButton from "./CustomInsertButton.svelte";
 import InsertButtonEdit from "./InsertButtonEdit.svelte";
+import FloatDialog from "./ui/FloatDialog.svelte";
 
 let {
 	editor,
@@ -77,7 +77,7 @@ $effect(() => {
 </script>
 
 {#if shown}
-  <div class="float-menu" use:draggable={{ bounds: 'body' }} ondblclick={() => (shown = false)} role="dialog" title="ドラッグして移動、ダブルクリックして隠す">
+<FloatDialog bind:shown>
     <div class="panels">
       {#if platform === 'honkoku'}
         <div class="panel">
@@ -231,7 +231,7 @@ $effect(() => {
         {/if}
       </div>
     </div>
-  </div>
+  </FloatDialog>
 {:else}
   <button class="show-button" onclick={() => (shown = true)} title="翻刻ツールボックスを開く">
     <img src={__ICON_URL__} alt="Honkoku" />
@@ -239,30 +239,6 @@ $effect(() => {
 {/if}
 
 <style>
-  .float-menu {
-    writing-mode: vertical-rl;
-
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #fbfbfb;
-    z-index: 100;
-    padding: 0.5em;
-
-    font-size: 0.85rem;
-
-    border-radius: 0.5em;
-
-    box-shadow: 4px 4px 1em #00000033;
-
-    display: grid;
-    grid-template-columns: auto 1fr;
-
-    user-select: none;
-    cursor: move;
-  }
-
   .panel {
     border: 1px solid #ccc; /* Light grey border */
     padding: 0.5em 0.25em;
