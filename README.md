@@ -15,7 +15,7 @@
 
 ### インストール
 
-[Greasy Fork の URL](https://greasyfork.org/ja/scripts/512368-honkoku-toolbox/)からインストールするか、または GitHub の Release から UserScript を入れてください。具体的な指示は各サイトのリンク先を参照してください。
+[Tampermonkey](https://www.tampermonkey.net/)や[Greasemonkey](https://www.greasespot.net/)などの UserScript マネージャーをインストールした上、[Greasy Fork の URL](https://greasyfork.org/ja/scripts/512368-honkoku-toolbox/)からインストールするか、または[GitHub の Release から UserScript を入れて](https://github.com/mkpoli/honkoku-toolbox/releases/latest/download/honkoku-toolbox.user.js)ください。具体的な指示は各サイトのリンク先を参照してください。
 
 ### 開く方法
 
