@@ -142,11 +142,11 @@ $effect(() => {
         <div class="panel">
           <h3>註釋</h3>
           <InsertButton color="pink" text={(t) => `／${t}（）`} display="ルビー" />
-          <InsertButton color="green" text="。" />
-          <InsertButton color="green" text="-" />
-          <InsertButton color="green" text=" " display="␣" />
-          <InsertButton color="green" text="　" display="▢" />
-          <InsertButton color="green" text="◯" />
+          <InsertButton color="green" text="。" title="句点" />
+          <InsertButton color="green" text="-" title="ハイフン" />
+          <InsertButton color="green" text=" " display="␣" title="半角スペース" />
+          <InsertButton color="green" text="　" display="▢" title="全角スペース" />
+          <InsertButton color="green" text="◯" title="全角丸" />
           <InsertButton color="blue" text={(t) => `《割書：${t}｜》`} display="割注" />
           <InsertButton color="red" text={(t) => `【${t}】`} display="注釈" />
         </div>
@@ -168,26 +168,26 @@ $effect(() => {
       {/if}
       <div class="panel">
         <h3>踊字</h3>
-        <InsertButton color="green" text="々" />
-        <InsertButton color="green" text="ゝ" />
-        <InsertButton color="green" text="ゞ" />
-        <InsertButton color="green" text="ヽ" />
-        <InsertButton color="green" text="ヾ" />
-        <InsertButton color="green" text="〻" />
-        <InsertButton color="green" text="〳" />
-        <InsertButton color="green" text="〴" />
-        <InsertButton color="green" text="〵" />
-        <InsertButton color="green" text="〱" />
-        <InsertButton color="green" text="〲" />
+        <InsertButton color="green" text="々" title="同の字点" />
+        <InsertButton color="green" text="ゝ" title="一の字点（ひらがな）" />
+        <InsertButton color="green" text="ゞ" title="一の字点（ひらがな、濁点付き）" />
+        <InsertButton color="green" text="ヽ" title="一の字点（カタカナ）" />
+        <InsertButton color="green" text="ヾ" title="一の字点（カタカナ、濁点付き）" />
+        <InsertButton color="green" text="〻" title="二の字点" />
+        <InsertButton color="green" text="〳" title="くの字点上" />
+        <InsertButton color="green" text="〴" title="くの字点上（濁点付き）" />
+        <InsertButton color="green" text="〵" title="くの字点下" />
+        <InsertButton color="green" text="〱" title="くの字点（濁点付き）" />
+        <InsertButton color="green" text="〲" title="くの字点（濁点付き）" />
         <h3>合字</h3>
-        <InsertButton color="green" text="〆" />
-        <InsertButton color="green" text=" ͡と" />
-        <InsertButton color="green" text="ゟ" />
-        <InsertButton color="green" text="𬼂" />
-        <InsertButton color="green" text="𬻿" />
-        <InsertButton color="green" text="ヿ" />
-        <InsertButton color="green" text="𪜈" />
-        <InsertButton color="green" text="𬼀" />
+        <InsertButton color="green" text="〆" title="締め" />
+        <InsertButton color="green" text=" ͡と" title="「こと」" />
+        <InsertButton color="green" text="ゟ" title="「より」" />
+        <InsertButton color="green" text="𬼂" title="「也」" />
+        <InsertButton color="green" text="𬻿" title="「也」" />
+        <InsertButton color="green" text="ヿ" title="「コト」" />
+        <InsertButton color="green" text="𪜈" title="「トモ」" />
+        <InsertButton color="green" text="𬼀" title="「タメ」" />
       </div>
       <div class="panel">
         <h3><button onclick={() => {
