@@ -7,10 +7,12 @@ let {
 	color = "black",
 	text,
 	display = text instanceof Function ? text("…") : text,
+	oncontextmenu,
 }: {
 	color?: Color;
 	text: string | ((orig: string) => string);
 	display?: string;
+	oncontextmenu?: (e: MouseEvent) => void;
 } = $props();
 
 const editor = getContext<Editor>("editor");
@@ -26,7 +28,9 @@ const editor = getContext<Editor>("editor");
         editor.insertAtCursor(text);
       }
     }
-  }}>{display}</button
+  }}
+  {oncontextmenu}
+>{display}</button
 >
 
 <style>

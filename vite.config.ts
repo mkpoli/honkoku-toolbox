@@ -33,6 +33,7 @@ export default defineConfig({
 					"https://ja.wikisource.org/w/index.php?title=*&action=*",
 				],
 				license: "MIT",
+				grant: ["GM.setValue", "GM.getValue"],
 			},
 		}),
 	],

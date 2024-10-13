@@ -3,7 +3,10 @@ import type { Editor } from "$lib/editor";
 import { draggable } from "@neodrag/svelte";
 import { setContext } from "svelte";
 import InsertButton from "./InsertButton.svelte";
+import { GM } from "$";
 import type { Color } from "./color";
+import CustomInsertButton from "./CustomInsertButton.svelte";
+import InsertButtonEdit from "./InsertButtonEdit.svelte";
 
 let {
 	editor,
@@ -42,7 +45,36 @@ $effect(() => {
 		}
 	}
 });
-</script> 
+
+let editingCustom = $state(false);
+
+type CustomButton = {
+	text: string;
+	display?: string;
+	color: Color;
+};
+let customButtons: CustomButton[] = $state([]);
+
+let customText = $state("");
+let customColor = $state<Color>("black");
+let customDisplay = $state("");
+$effect(() => {
+	customDisplay = customText;
+});
+
+(async () => {
+	customButtons = JSON.parse(await GM.getValue("customButtons", "[]"));
+})();
+
+$effect(() => {
+	GM.setValue("customButtons", JSON.stringify(customButtons)).then();
+});
+$effect(() => {
+	if (editingCustom) {
+		customText = editor.selectedText;
+	}
+});
+</script>
 
 {#if shown}
   <div class="float-menu" use:draggable={{ handle: '.dragger', bounds: 'body' }}>
@@ -155,6 +187,36 @@ $effect(() => {
         <InsertButton color="green" display="◌゙" text="゙" />
         <InsertButton color="green" display="◌゚" text="゚" />
         <button onclick={() => (showVariantKana = true)}>変体仮名</button>
+        <button onclick={() => {
+          editingCustom = !editingCustom;
+        }}>カスタム</button>
+        {#if editingCustom}
+          <InsertButtonEdit
+            color="black"
+            text={customText}
+            display={customDisplay}
+            onedit={(color, text, display) => {
+            customButtons.push({
+              text: text,
+              color: color,
+              display: !display || display === text ? undefined : display,
+            });
+            GM.setValue("customButtons", JSON.stringify(customButtons));
+            editingCustom = false;
+          }}/>
+        {:else}
+          {#each customButtons as {text, display, color}, i (i)}
+            <CustomInsertButton 
+              color={color} text={text} display={display}
+              onedit={(color, text, display) => {
+                customButtons[i] = { color, text, display: !display || display === text ? undefined : display };
+              }}
+              ondelete={() => {
+                customButtons.splice(i, 1);
+              }}
+            />
+          {/each}
+        {/if}
       </div>
     </div>
   </div>
@@ -263,5 +325,13 @@ $effect(() => {
 
   h3 button:hover {
     text-decoration: underline;
+  }
+
+  .panel button {
+    margin: 0.25em 0;
+  }
+
+  .panel button + button {
+    margin-bottom: 0;
   }
 </style>
