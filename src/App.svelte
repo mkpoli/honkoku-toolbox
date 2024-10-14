@@ -2,6 +2,7 @@
 import type { Editor } from "$lib/editor";
 import { CodeMirrorEditor, KojiEditor } from "$lib/editor";
 import VariantKana from "$lib/VariantKana.svelte";
+import VariantKanji from "$lib/VariantKanji.svelte";
 import FloatMenu from "./lib/MainMenu.svelte";
 
 const url = new URL(window.location.href);
@@ -87,6 +88,7 @@ setTimeout(() => {
 </script>
 
 {#if editor && platform}
-  <FloatMenu {editor} {platform}/>
-	<VariantKana {editor}  />
+	<VariantKana {editor} />
+	<FloatMenu {editor} {platform}/>
+	<VariantKanji {editor} />
 {/if}
