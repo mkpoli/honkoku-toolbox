@@ -11,6 +11,12 @@
 - [みんなで翻刻](https://honkoku.org/app/)
 - [日本語版 Wikisource](https://ja.wikisource.org/)
 
+## 機能概要
+
+### 変体仮名
+
+![変体仮名](./docs/hentaigana.gif)
+
 ## 使い方
 
 ### インストール
