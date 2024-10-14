@@ -67,7 +67,7 @@ export class KojiEditor implements Editor {
 	toggleClass(className: string, enabled?: boolean) {
 		if (enabled === undefined) {
 			this.wrapper.classList.toggle(className);
-		} else if (!enabled) {
+		} else if (enabled) {
 			this.wrapper.classList.add(className);
 		} else {
 			this.wrapper.classList.remove(className);
@@ -130,8 +130,14 @@ export class CodeMirrorEditor implements Editor {
 		this.codeMirror.on("change", callback);
 	}
 
-	toggleClass(className: string) {
-		this.codeMirror.getWrapperElement().classList.toggle(className);
+	toggleClass(className: string, enabled?: boolean) {
+		if (enabled === undefined) {
+			this.codeMirror.getWrapperElement().classList.toggle(className);
+		} else if (enabled) {
+			this.codeMirror.getWrapperElement().classList.add(className);
+		} else {
+			this.codeMirror.getWrapperElement().classList.remove(className);
+		}
 	}
 
 	get selectedText() {
