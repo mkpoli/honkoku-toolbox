@@ -15,6 +15,7 @@ let currentVariant: string = $state("");
 let instance: TippyInstance;
 let button: HTMLButtonElement;
 let variantsContainer: HTMLDivElement;
+let active = $state(false);
 onMount(() => {
 	instance = tippy(button, {
 		content: variantsContainer,
@@ -22,13 +23,19 @@ onMount(() => {
 		interactive: true,
 		offset: [0, 0],
 		placement: "right",
+		onShow: () => {
+			active = true;
+		},
+		onHide: () => {
+			active = false;
+		},
 	});
 });
 
 const editor = getContext<Editor>("editor");
 </script>
 
-<button bind:this={button}>{display}</button>
+<button bind:this={button} class:active>{display}</button>
 
 <div class="variants" bind:this={variantsContainer}>
   {#each variants as variant}
@@ -63,6 +70,11 @@ const editor = getContext<Editor>("editor");
 
   button:hover {
     background-color: #eee;
+    border-color: #000;
+  }
+
+  button.active {
+    background-color: #eee;
   }
 
   .variants {
@@ -74,6 +86,7 @@ const editor = getContext<Editor>("editor");
   .variants button {
     font-family: 'Noto Serif Hentaigana', 'UniHentaiKana', serif;
     border-radius: 2em;
+    box-shadow: 0 0 5px 1px #bbb;
   }
 
   .variants button:hover {
