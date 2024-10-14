@@ -17,6 +17,10 @@
 
 ![変体仮名](./docs/hentaigana.gif)
 
+### 異体字
+
+![異体字](./docs/itaiji.gif)
+
 ## 使い方
 
 ### インストール
