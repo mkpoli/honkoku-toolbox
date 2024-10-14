@@ -11,9 +11,10 @@ let {
 	variants: readonly (readonly [display: string, variant: string])[];
 } = $props();
 
-let instance: TippyInstance;
+let instance: TippyInstance | undefined;
 let button: HTMLButtonElement;
 let variantsContainer: HTMLDivElement;
+let active = $state(false);
 onMount(() => {
 	instance = tippy(button, {
 		content: variantsContainer,
@@ -21,13 +22,19 @@ onMount(() => {
 		interactive: true,
 		offset: [0, 0],
 		placement: "auto",
+		onShow: () => {
+			active = true;
+		},
+		onHide: () => {
+			active = false;
+		},
 	});
 });
 
 const editor = getContext<Editor>("editor");
 </script>
 
-<button bind:this={button}>{display}</button>
+<button bind:this={button} class:active>{display}</button>
 
 <div class="variants" bind:this={variantsContainer}>
   {#each variants as [display, variant]}
@@ -36,7 +43,7 @@ const editor = getContext<Editor>("editor");
         if (editor) {
           editor.insertAtCursor(variant);
         }
-        instance.hide();
+        instance?.hide();
       }}
       >{display}→{variant}</button
     >
@@ -61,12 +68,18 @@ const editor = getContext<Editor>("editor");
 
   button:hover {
     background-color: #eee;
+    border-color: #000;
+  }
+
+  button.active {
+    background-color: #eee;
   }
 
   .variants {
     display: flex;
     flex-direction: column;
     gap: 0;
+    box-shadow: 0 0 5px 1px #bbb;
   }
 
   .variants button {
