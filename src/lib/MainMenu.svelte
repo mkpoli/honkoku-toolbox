@@ -9,11 +9,7 @@ import InsertButtonEdit from "$lib/buttons/InsertButtonEdit.svelte";
 import FloatDialog from "$lib/ui/FloatDialog.svelte";
 import InsertButtonVariantKanji from "./buttons/InsertButtonVariantKanji.svelte";
 
-let {
-	editor,
-	platform,
-	showVariantKana = $bindable(false),
-}: { editor: Editor; platform: Platform; showVariantKana?: boolean } = $props();
+let { editor, platform }: { editor: Editor; platform: Platform } = $props();
 setContext("editor", editor);
 
 let shown = $state(false);
@@ -329,7 +325,6 @@ $effect(() => {
         <h3>其他</h3>
         <InsertButton color="green" display="◌゙" text="゙" />
         <InsertButton color="green" display="◌゚" text="゚" />
-        <button onclick={() => (showVariantKana = true)}>変体仮名</button>
         <button onclick={() => {
           editingCustom = !editingCustom;
         }}>カスタム</button>

@@ -84,13 +84,9 @@ setTimeout(() => {
 		// }
 	}
 }, 500);
-
-let showVariantKana: boolean = $state(false);
 </script>
 
 {#if editor && platform}
-  <FloatMenu {editor} {platform} bind:showVariantKana />
-	{#if showVariantKana}
-		<VariantKana {editor} bind:shown={showVariantKana} />
-	{/if}
+  <FloatMenu {editor} {platform}/>
+	<VariantKana {editor}  />
 {/if}

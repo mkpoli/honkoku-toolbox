@@ -4,9 +4,10 @@ import { setContext } from "svelte";
 import KanaButton from "$lib/buttons/KanaButton.svelte";
 import FloatDialog from "$lib/ui/FloatDialog.svelte";
 
-let { editor, shown = $bindable(false) }: { editor: Editor; shown?: boolean } =
-	$props();
+let { editor }: { editor: Editor } = $props();
 setContext("editor", editor);
+
+let shown = $state(false);
 
 const KANA_TABLE = [
 	["あ", ["𛀂", "𛀅", "𛀃", "𛀄"]],
@@ -76,23 +77,29 @@ editor.onchange(() => {
 });
 </script> 
 
-<FloatDialog bind:shown>
-	<div class="container">
-		<h2>変体仮名</h2>
-		<div class="kana-table">
-			{#each KANA_TABLE as k}
-				{#if k}
-					{@const [kana, variants] = k}
-				<div class="row">
-					<KanaButton display={kana} variants={variants} />
-					</div>
-				{:else}
-					<div class="row"></div>
-				{/if}
-			{/each}
+{#if shown}
+	<FloatDialog bind:shown>
+		<div class="container">
+			<h2>變體假名</h2>
+			<div class="kana-table">
+				{#each KANA_TABLE as k}
+					{#if k}
+						{@const [kana, variants] = k}
+					<div class="row">
+						<KanaButton display={kana} variants={variants} />
+						</div>
+					{:else}
+						<div class="row"></div>
+					{/if}
+				{/each}
+			</div>
 		</div>
-	</div>
-</FloatDialog>
+	</FloatDialog>
+{:else}
+  <button class="show-button" onclick={() => (shown = true)} title="變體假名パネルを開く">
+    <div class="kana">𛀂</div>
+  </button>
+{/if}
 
 <style>
   .kana-table {
@@ -114,5 +121,32 @@ editor.onchange(() => {
 	.container {
 		display: flex;
 		flex-direction: column;
+	}
+
+	.show-button {
+    position: fixed;
+    right: 0;
+    top: 40%;
+    transform: translateY(-50%);
+    background-color: #fff;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 1em #00000033;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    transition: transform 0.1s ease-in-out;
+    border: 1px solid #ccc;
+  }
+
+  .show-button:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+
+	.kana {
+		font-size: 2em;
+		font-family: 'Noto Serif Hentaigana', 'UniHentaiKana', serif;
 	}
 </style>
