@@ -1,14 +1,39 @@
 import { segment } from "$lib/string";
 
-export interface Editor {
-	insertAtCursor: (textToInsert: string) => void;
-	replaceSelection: (replacer: (text: string) => string) => void;
-	markText: (text: string) => void;
-	text: string;
-	segments: string[];
-	onchange: (callback: () => void) => void;
-	toggleClass: (className: string, enabled?: boolean) => void;
-	selectedText: string;
+export abstract class Editor {
+	abstract get text(): string;
+
+	get segments() {
+		return segment(this.text);
+	}
+
+	#selectedText: string = $state("");
+	/**
+	 * The text that is currently selected in the editor.
+	 *
+	 * This value is a reactive `$state()` and read-only.
+	 *
+	 * If there is no selection, this will be an empty string (`""`).
+	 *
+	 * For CodeMirror, if there are multiple selections, it will be
+	 * separated by `editor.codeMirror.doc.lineSeparator()`
+	 * (by default `editor.codeMirror.doc.lineSep || "\n"`).
+	 */
+	get selectedText(): string {
+		return this.#selectedText;
+	}
+	/**
+	 * @internal must be set by the editor implementation during selection change
+	 */
+	protected set selectedText(selectedText: string) {
+		this.#selectedText = selectedText;
+	}
+
+	abstract insertAtCursor(textToInsert: string): void;
+	abstract replaceSelection(replacer: (text: string) => string): void;
+	abstract markText(text: string): void;
+	abstract onchange(callback: () => void): void;
+	abstract toggleClass(className: string, enabled?: boolean): void;
 }
 
 interface TsrcEditorRaw {
@@ -20,9 +45,10 @@ interface TsrcEditorRaw {
 	markup: (pre: string, post: string) => void;
 	insertOrReplace: (replacer: string) => void;
 	watch: <T>(state: string, handler: (state: T) => void) => void;
+	selectedText: string;
 }
 
-export class KojiEditor implements Editor {
+export class KojiEditor extends Editor {
 	private wrapper: HTMLDivElement & {
 		__vue__: {
 			editor: TsrcEditorRaw;
@@ -32,6 +58,7 @@ export class KojiEditor implements Editor {
 	private editor: TsrcEditorRaw;
 
 	constructor(wrapper: HTMLDivElement) {
+		super();
 		this.wrapper = wrapper as HTMLDivElement & {
 			__vue__: { editor: TsrcEditorRaw };
 		};
@@ -39,17 +66,21 @@ export class KojiEditor implements Editor {
 			throw new Error("KojiEditor: wrapper is not a Vue component");
 		}
 		this.editor = this.wrapper.__vue__.editor;
+
+		this.editor.watch("selection", () => {
+			this.selectedText = this.editor.selectedText;
+		});
 	}
 
-	insertAtCursor(textToInsert: string) {
+	override insertAtCursor(textToInsert: string) {
 		this.editor.insertOrReplace(textToInsert);
 	}
 
-	replaceSelection(replacer: (text: string) => string) {
-		this.editor.insertOrReplace(replacer(this.selectedText));
+	override replaceSelection(replacer: (text: string) => string) {
+		this.editor.insertOrReplace(replacer(this.selectedText ?? ""));
 	}
 
-	markText(text: string) {
+	override markText(text: string) {
 		const allChars = this.wrapper.querySelectorAll(".token .char");
 		for (const char of allChars) {
 			if (char.textContent === text) {
@@ -58,20 +89,16 @@ export class KojiEditor implements Editor {
 		}
 	}
 
-	get text() {
+	override get text() {
 		return this.editor.value;
 	}
 
-	get segments() {
-		return segment(this.text);
-	}
-
-	onchange(callback: () => void) {
+	override onchange(callback: () => void) {
 		// this.textarea.addEventListener("input", callback);
 		this.editor.watch("requestedSrc", callback);
 	}
 
-	toggleClass(className: string, enabled?: boolean) {
+	override toggleClass(className: string, enabled?: boolean) {
 		if (enabled === undefined) {
 			this.wrapper.classList.toggle(className);
 		} else if (enabled) {
@@ -80,19 +107,19 @@ export class KojiEditor implements Editor {
 			this.wrapper.classList.remove(className);
 		}
 	}
-
-	get selectedText() {
-		const { start, end } = this.editor.selection;
-		return this.text.substring(start, end);
-	}
 }
 
-export class CodeMirrorEditor implements Editor {
+export class CodeMirrorEditor extends Editor {
 	constructor(private codeMirror: CodeMirror.Editor) {
+		super();
 		this.codeMirror = codeMirror;
+
+		this.codeMirror.on("cursorActivity", () => {
+			this.selectedText = this.codeMirror.getSelection();
+		});
 	}
 
-	insertAtCursor(textToInsert: string) {
+	override insertAtCursor(textToInsert: string) {
 		if (this.codeMirror.somethingSelected()) {
 			this.replaceSelection((_) => textToInsert);
 		} else {
@@ -101,12 +128,12 @@ export class CodeMirrorEditor implements Editor {
 		}
 	}
 
-	replaceSelection(replacer: (text: string) => string) {
-		const replacedText = replacer(this.selectedText);
+	override replaceSelection(replacer: (text: string) => string) {
+		const replacedText = replacer(this.selectedText ?? "");
 		this.codeMirror.replaceSelection(replacedText);
 	}
 
-	markText(substr: string) {
+	override markText(substr: string) {
 		if (!substr || !this.text.includes(substr)) return;
 
 		const textClusters = segment(this.text);
@@ -145,19 +172,15 @@ export class CodeMirrorEditor implements Editor {
 		}
 	}
 
-	get text() {
+	override get text() {
 		return this.codeMirror.getValue();
 	}
 
-	get segments() {
-		return segment(this.text);
-	}
-
-	onchange(callback: () => void) {
+	override onchange(callback: () => void) {
 		this.codeMirror.on("change", callback);
 	}
 
-	toggleClass(className: string, enabled?: boolean) {
+	override toggleClass(className: string, enabled?: boolean) {
 		if (enabled === undefined) {
 			this.codeMirror.getWrapperElement().classList.toggle(className);
 		} else if (enabled) {
@@ -165,9 +188,5 @@ export class CodeMirrorEditor implements Editor {
 		} else {
 			this.codeMirror.getWrapperElement().classList.remove(className);
 		}
-	}
-
-	get selectedText() {
-		return this.codeMirror.getSelection();
 	}
 }

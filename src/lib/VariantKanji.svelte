@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Editor } from "$lib/editor";
+import type { Editor } from "$lib/editor.svelte";
 import { setContext } from "svelte";
 import FloatDialog from "$lib/ui/FloatDialog.svelte";
 import InsertButton from "$lib/buttons/InsertButton.svelte";

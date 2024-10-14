@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Editor } from "$lib/editor";
+import type { Editor } from "$lib/editor.svelte";
 import { setContext } from "svelte";
 import InsertButton from "$lib/buttons/InsertButton.svelte";
 import { GM } from "$";

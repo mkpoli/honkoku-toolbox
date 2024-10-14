@@ -1,6 +1,6 @@
 <script lang="ts">
-import type { Editor } from "$lib/editor";
-import { CodeMirrorEditor, KojiEditor } from "$lib/editor";
+import type { Editor } from "$lib/editor.svelte";
+import { CodeMirrorEditor, KojiEditor } from "$lib/editor.svelte";
 import VariantKana from "$lib/VariantKana.svelte";
 import VariantKanji from "$lib/VariantKanji.svelte";
 import FloatMenu from "./lib/MainMenu.svelte";
