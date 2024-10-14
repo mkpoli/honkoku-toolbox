@@ -114,6 +114,10 @@ editor.onchange(() => {
     gap: 0.25em;
   }
 
+	button {
+		font-family: 'Noto Serif Hentaigana', 'UniHentaiKana', serif;
+	}
+
 	h2 {
 		margin: 0;
 		border: none;
