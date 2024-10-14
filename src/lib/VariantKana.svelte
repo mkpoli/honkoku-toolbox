@@ -137,6 +137,7 @@ editor.onchange(() => {
     position: fixed;
     right: 0;
     top: 40%;
+		height: 3rem;
     transform: translateY(-50%);
     background-color: #fff;
     padding: 0.5em;

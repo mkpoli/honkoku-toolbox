@@ -386,6 +386,7 @@ $effect(() => {
     position: fixed;
     right: 0;
     top: 50%;
+    height: 3rem;
     transform: translateY(-50%);
     background-color: #fff;
     padding: 0.5em;
