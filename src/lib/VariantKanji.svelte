@@ -8,7 +8,6 @@ let { editor }: { editor: Editor } = $props();
 setContext("editor", editor);
 import InsertButtonVariantKanji from "./buttons/InsertButtonVariantKanji.svelte";
 import type { Color } from "$lib/color";
-import { segment } from "$lib/string";
 
 let shown = $state(false);
 
@@ -150,28 +149,20 @@ const VARIANTS: { traditional: string; simplified: string; color: Color }[] = [
 	{ traditional: "內", simplified: "内", color: "pink" },
 ];
 
-let text = $state(editor.text);
-// let segments = $derived(segment(text));
-
 $effect(() => {
-	const segments = segment(text);
 	for (const { simplified } of VARIANTS) {
-		if (segments.includes(simplified)) {
+		if (editor.segments.includes(simplified)) {
 			editor.markText(simplified);
 		}
 	}
 
 	for (const [_key, variants] of Object.entries(GROUPED_VARIANTS)) {
 		for (const [display, _variant] of variants) {
-			if (segments.includes(display)) {
+			if (editor.segments.includes(display)) {
 				editor.markText(display);
 			}
 		}
 	}
-});
-
-editor.onchange(() => {
-	text = editor.text;
 });
 
 let highlight = $state(false);

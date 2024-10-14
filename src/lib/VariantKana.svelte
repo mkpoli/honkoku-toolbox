@@ -70,12 +70,6 @@ const KANA_TABLE = [
 	null,
 	null,
 ] as const;
-
-let text = $state(editor.text);
-
-editor.onchange(() => {
-	text = editor.text;
-});
 </script> 
 
 {#if shown}

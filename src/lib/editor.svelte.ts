@@ -1,11 +1,28 @@
 import { segment } from "$lib/string";
 
 export abstract class Editor {
-	abstract get text(): string;
-
-	get segments() {
-		return segment(this.text);
+	#text: string = $state("");
+	/**
+	 * The text of the editor.
+	 *
+	 * This value is a reactive `$state()` and read-only.
+	 */
+	get text() {
+		return this.#text;
 	}
+	/**
+	 * @internal must be set by the editor implementation during text change
+	 */
+	protected set text(text: string) {
+		this.#text = text;
+	}
+
+	/**
+	 * The grapheme cluster segments of the editor.
+	 *
+	 * This value is a reactive `$derived()` and read-only.
+	 */
+	segments = $derived(segment(this.text));
 
 	#selectedText: string = $state("");
 	/**
@@ -32,7 +49,6 @@ export abstract class Editor {
 	abstract insertAtCursor(textToInsert: string): void;
 	abstract replaceSelection(replacer: (text: string) => string): void;
 	abstract markText(text: string): void;
-	abstract onchange(callback: () => void): void;
 	abstract toggleClass(className: string, enabled?: boolean): void;
 }
 
@@ -70,6 +86,10 @@ export class KojiEditor extends Editor {
 		this.editor.watch("selection", () => {
 			this.selectedText = this.editor.selectedText;
 		});
+
+		this.editor.watch("requestedSrc", () => {
+			this.text = this.editor.value;
+		});
 	}
 
 	override insertAtCursor(textToInsert: string) {
@@ -87,15 +107,6 @@ export class KojiEditor extends Editor {
 				char.classList.add("highlight-variant");
 			}
 		}
-	}
-
-	override get text() {
-		return this.editor.value;
-	}
-
-	override onchange(callback: () => void) {
-		// this.textarea.addEventListener("input", callback);
-		this.editor.watch("requestedSrc", callback);
 	}
 
 	override toggleClass(className: string, enabled?: boolean) {
@@ -116,6 +127,10 @@ export class CodeMirrorEditor extends Editor {
 
 		this.codeMirror.on("cursorActivity", () => {
 			this.selectedText = this.codeMirror.getSelection();
+		});
+
+		this.codeMirror.on("change", () => {
+			this.text = this.codeMirror.getValue();
 		});
 	}
 
@@ -170,14 +185,6 @@ export class CodeMirrorEditor extends Editor {
 				className: "highlight-variant",
 			});
 		}
-	}
-
-	override get text() {
-		return this.codeMirror.getValue();
-	}
-
-	override onchange(callback: () => void) {
-		this.codeMirror.on("change", callback);
 	}
 
 	override toggleClass(className: string, enabled?: boolean) {
