@@ -21,6 +21,7 @@ onMount(() => {
 		theme: "kana",
 		interactive: true,
 		offset: [0, 0],
+		placement: "right",
 	});
 });
 
