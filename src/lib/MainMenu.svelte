@@ -323,8 +323,6 @@ $effect(() => {
       </div>
       <div class="panel">
         <h3>其他</h3>
-        <InsertButton color="green" display="◌゙" text="゙" />
-        <InsertButton color="green" display="◌゚" text="゚" />
         <button onclick={() => {
           editingCustom = !editingCustom;
         }}>カスタム</button>

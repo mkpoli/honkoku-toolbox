@@ -3,6 +3,7 @@ import type { Editor } from "$lib/editor";
 import { setContext } from "svelte";
 import KanaButton from "$lib/buttons/KanaButton.svelte";
 import FloatDialog from "$lib/ui/FloatDialog.svelte";
+import InsertButton from "$lib/buttons/InsertButton.svelte";
 
 let { editor }: { editor: Editor } = $props();
 setContext("editor", editor);
@@ -93,6 +94,10 @@ editor.onchange(() => {
 					{/if}
 				{/each}
 			</div>
+			<div class="panel">
+				<InsertButton color="green" display="◌゙" text="゙" title="濁点" />
+				<InsertButton color="green" display="◌゚" text="゚" title="半濁点" />
+			</div>
 		</div>
 	</FloatDialog>
 {:else}
@@ -121,6 +126,7 @@ editor.onchange(() => {
 	.container {
 		display: flex;
 		flex-direction: column;
+		font-family: 'Noto Serif Hentaigana', 'UniHentaiKana', serif;
 	}
 
 	.show-button {
@@ -147,6 +153,12 @@ editor.onchange(() => {
 
 	.kana {
 		font-size: 2em;
-		font-family: 'Noto Serif Hentaigana', 'UniHentaiKana', serif;
+	}
+
+	.panel {
+		display: flex;
+		flex-direction: row;
+		gap: 0.25em;
+		padding: 0.25em;
 	}
 </style>
