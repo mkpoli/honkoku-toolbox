@@ -35,7 +35,9 @@ onMount(() => {
 const editor = getContext<Editor>("editor");
 </script>
 
-<button bind:this={button} class:active>{display}</button>
+<button bind:this={button} class:active onclick={() => {
+  editor?.insertAtCursor(display);
+}}>{display}</button>
 
 <div class="variants" bind:this={variantsContainer}>
   {#each variants as variant}
