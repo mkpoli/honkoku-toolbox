@@ -4,7 +4,7 @@ export interface Editor {
 	markText: (text: string) => void;
 	text: string;
 	onchange: (callback: () => void) => void;
-	toggleClass: (className: string) => void;
+	toggleClass: (className: string, enabled?: boolean) => void;
 	selectedText: string;
 }
 
@@ -64,8 +64,14 @@ export class KojiEditor implements Editor {
 		this.editor.watch("requestedSrc", callback);
 	}
 
-	toggleClass(className: string) {
-		this.wrapper.classList.toggle(className);
+	toggleClass(className: string, enabled?: boolean) {
+		if (enabled === undefined) {
+			this.wrapper.classList.toggle(className);
+		} else if (enabled) {
+			this.wrapper.classList.add(className);
+		} else {
+			this.wrapper.classList.remove(className);
+		}
 	}
 
 	get selectedText() {

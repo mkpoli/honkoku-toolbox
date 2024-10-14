@@ -166,15 +166,21 @@ let text = $state(editor.text);
 editor.onchange(() => {
 	text = editor.text;
 });
+
+let highlight = $state(false);
+$effect(() => {
+	editor.toggleClass("display-variant-highlight", highlight);
+});
 </script> 
 
 {#if shown}
 	<FloatDialog bind:shown>
 		<div class="container">
 			<h2>異體漢字</h2>
-			<button onclick={() => {
-				editor.toggleClass("display-variant-highlight")
-			}}>ハイライト</button>
+			<label >
+				<input type="checkbox" bind:checked={highlight} name="highlight"  />
+				<span>異體字をハイライト</span>
+			</label>
 			<div class="panel">
 				{#each VARIANTS as {traditional, simplified, color}}
 					<InsertButton color={color} text={traditional} display={`${traditional}=${simplified}`} />
@@ -204,6 +210,9 @@ editor.onchange(() => {
 	.container {
 		display: flex;
 		flex-direction: column;
+		gap: 0.25em;
+		align-items: stretch;
+		justify-content: center;
 		font-family: 'Noto Serif Hentaigana', 'UniHentaiKana', serif;
 	}
 
@@ -238,7 +247,13 @@ editor.onchange(() => {
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
 		gap: 0.25em;
-		padding: 0.25em;
 		max-width: 20em;
+	}
+
+	label {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5em;
 	}
 </style>
