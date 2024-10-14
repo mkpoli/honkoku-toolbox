@@ -47,6 +47,7 @@ const editor = getContext<Editor>("editor");
     align-items: center;
     justify-content: center;
     white-space: nowrap;
+    font-family: inherit;
   }
 
   button:hover {
