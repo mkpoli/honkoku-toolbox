@@ -234,6 +234,8 @@ $effect(() => {
     border-bottom-right-radius: 0;
     transition: transform 0.1s ease-in-out;
     border: 1px solid #ccc;
+		font-family: serif;
+		color: #0f03f8;
   }
 
   .show-button:hover {

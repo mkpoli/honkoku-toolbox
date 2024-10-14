@@ -151,6 +151,7 @@ editor.onchange(() => {
     border-bottom-right-radius: 0;
     transition: transform 0.1s ease-in-out;
     border: 1px solid #ccc;
+		color: #ff36a4;
   }
 
   .show-button:hover {
