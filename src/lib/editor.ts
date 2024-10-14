@@ -67,7 +67,7 @@ export class KojiEditor implements Editor {
 	toggleClass(className: string, enabled?: boolean) {
 		if (enabled === undefined) {
 			this.wrapper.classList.toggle(className);
-		} else if (enabled) {
+		} else if (!enabled) {
 			this.wrapper.classList.add(className);
 		} else {
 			this.wrapper.classList.remove(className);
