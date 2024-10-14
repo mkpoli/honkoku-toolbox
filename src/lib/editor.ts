@@ -1,8 +1,11 @@
+import { segment } from "$lib/string";
+
 export interface Editor {
 	insertAtCursor: (textToInsert: string) => void;
 	replaceSelection: (replacer: (text: string) => string) => void;
 	markText: (text: string) => void;
 	text: string;
+	segments: string[];
 	onchange: (callback: () => void) => void;
 	toggleClass: (className: string, enabled?: boolean) => void;
 	selectedText: string;
@@ -59,6 +62,10 @@ export class KojiEditor implements Editor {
 		return this.editor.value;
 	}
 
+	get segments() {
+		return segment(this.text);
+	}
+
 	onchange(callback: () => void) {
 		// this.textarea.addEventListener("input", callback);
 		this.editor.watch("requestedSrc", callback);
@@ -102,28 +109,48 @@ export class CodeMirrorEditor implements Editor {
 	markText(substr: string) {
 		if (!substr || !this.text.includes(substr)) return;
 
-		const occurrences = [];
-		let index = this.text.indexOf(substr);
-		while (index !== -1) {
-			occurrences.push(index);
-			index = this.text.indexOf(substr, index + 1);
+		const textClusters = segment(this.text);
+		const substrClusters = segment(substr);
+
+		const clusterCodeUnitIndices = [0];
+		for (let i = 0; i < textClusters.length; i++) {
+			clusterCodeUnitIndices.push(
+				clusterCodeUnitIndices[i] + textClusters[i].length,
+			);
 		}
 
-		for (const index of occurrences) {
-			const textPos = this.codeMirror.posFromIndex(index);
+		const occurrences = [];
 
-			this.codeMirror.markText(
-				textPos,
-				this.codeMirror.posFromIndex(index + substr.length),
-				{
-					className: "highlight-variant",
-				},
-			);
+		for (let i = 0; i <= textClusters.length - substrClusters.length; i++) {
+			let match = true;
+			for (let j = 0; j < substrClusters.length; j++) {
+				if (textClusters[i + j] !== substrClusters[j]) {
+					match = false;
+					break;
+				}
+			}
+			if (match) {
+				const startIndex = clusterCodeUnitIndices[i];
+				const endIndex = clusterCodeUnitIndices[i + substrClusters.length];
+				occurrences.push({ startIndex, endIndex });
+			}
+		}
+
+		for (const occurrence of occurrences) {
+			const textPosStart = this.codeMirror.posFromIndex(occurrence.startIndex);
+			const textPosEnd = this.codeMirror.posFromIndex(occurrence.endIndex);
+			this.codeMirror.markText(textPosStart, textPosEnd, {
+				className: "highlight-variant",
+			});
 		}
 	}
 
 	get text() {
 		return this.codeMirror.getValue();
+	}
+
+	get segments() {
+		return segment(this.text);
 	}
 
 	onchange(callback: () => void) {
