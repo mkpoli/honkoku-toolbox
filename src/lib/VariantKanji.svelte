@@ -205,6 +205,7 @@ $effect(() => {
 		font-family: inherit;
 		width: 100%;
 		text-align: center;
+		font-weight: bold;
 	}
 
 	.container {
