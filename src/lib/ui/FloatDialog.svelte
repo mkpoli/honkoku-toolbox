@@ -8,7 +8,7 @@ let {
 }: { children: Snippet<[]>; shown?: boolean } = $props();
 </script> 
 
-<div class="float-menu" use:draggable={{ bounds: 'body' }} role="dialog" title="ドラッグして移動、ダブルクリックして隠す" ondblclick={() => (shown = false)}>
+<div class="float-menu" use:draggable role="dialog" title="ドラッグして移動、ダブルクリックして隠す" ondblclick={() => (shown = false)}>
   {@render children()}
 </div>
 
