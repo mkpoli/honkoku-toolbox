@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Editor } from "$lib/editor.svelte";
+import { KojiEditor, type Editor } from "$lib/editor.svelte";
 import { setContext } from "svelte";
 import FloatDialog from "$lib/ui/FloatDialog.svelte";
 import InsertButton from "$lib/buttons/InsertButton.svelte";
@@ -15,6 +15,41 @@ const VARIANTS: { traditional: string; simplified: string; color: Color }[] = [
 	{ traditional: "敎", simplified: "教", color: "blue" },
 	{ traditional: "內", simplified: "内", color: "pink" },
 ];
+
+/**
+ * Input mode for variant kanji
+ *
+ * - compatibility-only: only use compatibility kanji (for honkoku.org which does not support variant selector), variant selector is not shown
+ * - variant-selector-only: only use variant selector (for honkoku.org which does not support compatibility kanji), compatibility kanji is not shown
+ * - compatibility-first: show compatibility kanji first, then variant selector
+ * - case-by-case: let user select compatibility or variant selector case by case
+ *
+ * Because every compatibility kanji has a variant selector counterpart, it will
+ */
+let inputMode = $state<
+	"compatibility-only" | "variant-selector-only" | "compatibility-first"
+	// | "case-by-case"
+>(
+	editor instanceof KojiEditor
+		? "compatibility-first"
+		: "variant-selector-only",
+);
+
+function selectVariant(
+	compatibility: string | null,
+	variantSelector: string | null,
+) {
+	switch (inputMode) {
+		case "compatibility-only":
+			return compatibility || null;
+		case "variant-selector-only":
+			return variantSelector || null;
+		case "compatibility-first":
+			return compatibility || variantSelector;
+		// case "case-by-case":
+		// 	return;
+	}
+}
 
 $effect(() => {
 	for (const { simplified } of VARIANTS) {
@@ -46,12 +81,17 @@ $effect(() => {
 				<input type="checkbox" bind:checked={highlight} name="highlight"  />
 				<span>異體字をハイライト</span>
 			</label>
+			<select bind:value={inputMode}>
+				<option value="variant-selector-only">異体字セレクタのみ</option>
+				<option value="compatibility-only">CJK互換漢字のみ</option>
+				<option value="compatibility-first">CJK互換漢字優先</option>
+			</select>
 			<div class="panel">
 				{#each VARIANTS as {traditional, simplified, color}}
 					<InsertButton color={color} text={traditional} display={`${traditional}=${simplified}`} />
 				{/each}
 				{#each Object.entries(GROUPED_VARIANTS) as [key, variants]}
-					<InsertButtonVariantKanji display={key} variants={variants} />
+					<InsertButtonVariantKanji display={key} variants={variants.map(([display, [compatibility, variantSelector]]) => ([display, selectVariant(compatibility, variantSelector)]))} />
 				{/each}
 			</div>
 		</div>

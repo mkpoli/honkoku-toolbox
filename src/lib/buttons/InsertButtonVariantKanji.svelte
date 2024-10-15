@@ -8,7 +8,7 @@ let {
 	variants,
 }: {
 	display: string;
-	variants: readonly (readonly [display: string, variant: string])[];
+	variants: readonly (readonly [display: string, variant: string | null])[];
 } = $props();
 
 let instance: TippyInstance | undefined;
@@ -38,8 +38,9 @@ const editor = getContext<Editor>("editor");
 
 <div class="variants" bind:this={variantsContainer}>
   {#each variants as [display, variant]}
-    <button
-      onclick={() => {
+    {#if variant}
+      <button
+        onclick={() => {
         if (editor) {
           editor.insertAtCursor(variant);
         }
@@ -47,6 +48,7 @@ const editor = getContext<Editor>("editor");
       }}
       >{display}→{variant}</button
     >
+    {/if}
   {/each}
 </div>
 
