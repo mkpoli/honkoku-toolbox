@@ -8,6 +8,7 @@ let { editor }: { editor: Editor } = $props();
 setContext("editor", editor);
 import InsertButtonVariantKanji from "./buttons/InsertButtonVariantKanji.svelte";
 import type { Color } from "$lib/color";
+import { preferences } from "./preferences.svelte";
 
 let shown = $state(false);
 
@@ -66,10 +67,8 @@ $effect(() => {
 		}
 	}
 });
-
-let highlight = $state(false);
 $effect(() => {
-	editor.toggleClass("display-variant-highlight", highlight);
+	editor.toggleClass("display-variant-highlight", preferences.highlight);
 });
 </script> 
 
@@ -78,7 +77,7 @@ $effect(() => {
 		<div class="container">
 			<h2>異體漢字</h2>
 			<label >
-				<input type="checkbox" bind:checked={highlight} name="highlight"  />
+				<input type="checkbox" bind:checked={preferences.highlight} name="highlight"  />
 				<span>異體字をハイライト</span>
 			</label>
 			<select bind:value={inputMode}>
