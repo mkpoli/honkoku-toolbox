@@ -6,9 +6,11 @@ import tippy, { type Instance as TippyInstance } from "tippy.js";
 let {
 	display,
 	variants,
+	selection,
 }: {
 	display: string;
 	variants: readonly (readonly [display: string, variant: string | null])[];
+	selection: string;
 } = $props();
 
 let instance: TippyInstance | undefined;
@@ -34,7 +36,7 @@ onMount(() => {
 const editor = getContext<Editor>("editor");
 </script>
 
-<button bind:this={button} class:active>{display}</button>
+<button bind:this={button} class:active class:selected={variants.some(([display, _v]) => selection.includes(display))}>{display}</button>
 
 <div class="variants" bind:this={variantsContainer}>
   {#each variants as [display, variant]}
@@ -75,6 +77,11 @@ const editor = getContext<Editor>("editor");
 
   button.active {
     background-color: #eee;
+  }
+
+  button.selected {
+    border-color: #765300;
+    background-color: #fff0cc;
   }
 
   .variants {
