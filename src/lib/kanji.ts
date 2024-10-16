@@ -3,6 +3,7 @@
  *
  * Notes:
  * - 緒 U+7DD2 and 緖 U+7DD7 are both CJK Unified Ideographs for historical reasons, so 緖 U+7DD7 is filled in both compatibility and variant selector.
+ * - Ditto. 眞 U+771E; 顚 U+985A; 絶 U+7D76 | 絕 U+7D55
  */
 export const GROUPED_VARIANTS: Record<
 	string,
@@ -55,8 +56,9 @@ export const GROUPED_VARIANTS: Record<
 		["禎", ["禎", "禎︀"]],
 	],
 	"真→眞": [
-		["真", ["眞", null]],
-		["顛", ["顚", null]],
+		["直", ["直", "直︁"]],
+		["真", ["眞", "眞"]],
+		["顛", ["顚", "顚"]],
 	],
 	"开→幵": [
 		["研", ["硏", null]],
@@ -101,10 +103,11 @@ export const GROUPED_VARIANTS: Record<
 		["欄", ["欄", "欄︀"]],
 	],
 	"⺈→刀": [
-		["免", ["免", null]],
+		["免", ["免", "免︀"]],
 		["逸", ["逸", null]],
 		["晩", ["晚", null]],
 		["勉", ["勉", null]],
+		["絶", ["絕", "絕"]],
 	],
 	"廿→艹": [
 		["漢", ["漢", "漢︀"]],
@@ -153,4 +156,6 @@ export const GROUPED_VARIANTS: Record<
 		["羽︀", ["羽", "羽󠄀"]],
 		["習", [null, "習󠄁"]],
 	],
+	"丹→丹󠄁": [["丹", [null, "丹󠄁"]]],
+	"亡→亡󠄁": [["亡", [null, "亡󠄁"]]],
 } as const;
