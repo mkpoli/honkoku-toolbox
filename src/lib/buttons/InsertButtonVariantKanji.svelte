@@ -36,12 +36,13 @@ onMount(() => {
 const editor = getContext<Editor>("editor");
 </script>
 
-<button bind:this={button} class:active class:selected={variants.some(([display, _v]) => selection.includes(display))}>{display}</button>
+<button bind:this={button} class="type" class:active class:selected={variants.some(([display, _v]) => selection.includes(display))}>{display}</button>
 
 <div class="variants" bind:this={variantsContainer}>
   {#each variants as [display, variant]}
     {#if variant}
       <button
+        class:selected={selection.includes(display)}
         onclick={() => {
         if (editor) {
           editor.insertAtCursor(variant);
@@ -80,9 +81,13 @@ const editor = getContext<Editor>("editor");
   }
 
   button.selected {
-    border-color: #765300;
     background-color: #fff0cc;
   }
+
+  .type.selected {
+    border-color: #765300;
+  }
+
 
   .variants {
     display: flex;
