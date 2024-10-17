@@ -22,7 +22,7 @@ export abstract class Editor {
 	 *
 	 * This value is a reactive `$derived()` and read-only.
 	 */
-	segments = $derived(segment(this.text));
+	segments = $derived(segment(this.#text));
 
 	#selectedText: string = $state("");
 	/**
