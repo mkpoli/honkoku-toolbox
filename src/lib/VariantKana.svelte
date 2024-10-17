@@ -91,6 +91,9 @@ const KANA_TABLE = [
 			<div class="panel">
 				<InsertButton color="green" display="◌゙" text="゙" title="濁点" />
 				<InsertButton color="green" display="◌゚" text="゚" title="半濁点" />
+				<div style="flex-grow: 1"></div>
+				<InsertButton color="green" display="子" text="子" title="「ネ」の異体字（漢字で代用）" />
+				<InsertButton color="green" display="井" text="井" title="「井」の異体字（漢字で代用）" />
 			</div>
 		</div>
 	</FloatDialog>
