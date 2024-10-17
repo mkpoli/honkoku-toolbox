@@ -57,7 +57,7 @@ const editor = getContext<Editor>("editor");
 
 <style>
   button {
-    /* padding: 0.5em 0.1em; */
+    padding: 0.5em 0.1em;
 
     border: 1px solid #bbb;
     background-color: #fff;
@@ -101,7 +101,6 @@ const editor = getContext<Editor>("editor");
   .variants button {
     width: 2em;
   }
-
 
   .variants button:hover {
     background-color: #eee;

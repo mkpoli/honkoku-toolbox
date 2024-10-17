@@ -85,7 +85,7 @@ let selectedVariants = $derived(
 
 {#if shown}
 	<FloatDialog bind:shown>
-		<div class="container">
+		<div class="menu-content-container">
 			<h2>異體漢字</h2>
 			<label >
 				<input type="checkbox" bind:checked={preferences.highlight} name="highlight"  />
@@ -129,7 +129,7 @@ let selectedVariants = $derived(
 		font-weight: bold;
 	}
 
-	.container {
+	.menu-content-container {
 		display: flex;
 		flex-direction: column;
 		gap: 0.25em;
@@ -185,5 +185,12 @@ let selectedVariants = $derived(
 		border: 1px solid #ccc;
 		margin: 0 0.5em;
 		height: 100%;
+	}
+
+	select {
+		width: 100%;
+		padding: 0.5em;
+		border: 1px solid #ccc;
+		border-radius: 0.5em;
 	}
 </style>

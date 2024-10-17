@@ -74,7 +74,7 @@ const KANA_TABLE = [
 
 {#if shown}
 	<FloatDialog bind:shown>
-		<div class="container">
+		<div class="menu-content-container">
 			<h2>變體假名</h2>
 			<div class="kana-table">
 				{#each KANA_TABLE as k}
@@ -125,7 +125,7 @@ const KANA_TABLE = [
 		font-weight: bold;
 	}
 
-	.container {
+	.menu-content-container {
 		display: flex;
 		flex-direction: column;
 		font-family: 'Noto Serif Hentaigana', 'UniHentaiKana', serif;
