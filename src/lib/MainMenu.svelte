@@ -130,6 +130,9 @@ $effect(() => {
           <InsertButton color="green" text={(t) => `{{傍点|style=open triangle|${t}}}`} display="△" title="傍点（白三角）" />
           <h3>ルビー</h3>
           <InsertButton color="pink" text={(t) => `{{ruby|${t}|}}`} display="ルビ" />
+          <h3>註釋</h3>
+          <InsertButton color="green" text={(t) => `<ref>${t}</ref>`} display="註釋" />
+          <InsertButton color="green" text={(t) => `{{分註|${t}|}}`} display="分註" title="分註（割註）" />
         </div>
       {/if}
       <div class="panel">
