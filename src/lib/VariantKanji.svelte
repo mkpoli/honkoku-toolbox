@@ -87,7 +87,7 @@ $effect(() => {
 			</select>
 			<div class="panel">
 				{#each VARIANTS as {traditional, simplified, color}}
-					<InsertButton color={color} text={traditional} display={`${traditional}=${simplified}`} />
+					<InsertButton color={color} text={traditional} display={`${simplified}→${traditional}`} />
 				{/each}
 				{#each Object.entries(GROUPED_VARIANTS) as [key, variants]}
 					<InsertButtonVariantKanji display={key} variants={variants.map(([display, [compatibility, variantSelector]]) => ([display, selectVariant(compatibility, variantSelector)]))} selection={editor.selectedText} />
