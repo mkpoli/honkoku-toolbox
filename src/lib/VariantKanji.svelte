@@ -106,7 +106,10 @@ let selectedVariants = $derived(
 				<hr/>
 				<div class="panel">
 					{#each selectedVariants as [key, variant]}
-						<InsertButton color="orange" display={`${key}→${variant}`} text={variant} title={`「${key}」の異體字`} />
+						<InsertButton color="orange" display={`${key}→${variant}`} text={(selectedText) => segment(selectedText).map(
+								(segment) => segment === key ? variant : segment
+							).join("")
+						} title={`「${key}」の異體字`} />
 					{/each}
 				</div>
 			{/if}
