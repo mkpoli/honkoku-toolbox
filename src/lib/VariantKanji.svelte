@@ -86,12 +86,10 @@ $effect(() => {
 				<option value="compatibility-first">CJK互換漢字優先</option>
 			</select>
 			<div class="panel">
-				{#each VARIANTS as {traditional, simplified, color}}
-					<InsertButton color={color} text={traditional} display={`${simplified}→${traditional}`} />
-				{/each}
 				{#each Object.entries(GROUPED_VARIANTS) as [key, variants]}
 					<InsertButtonVariantKanji display={key} variants={variants.map(([display, [compatibility, variantSelector]]) => ([display, selectVariant(compatibility, variantSelector)]))} selection={editor.selectedText} />
 				{/each}
+				<InsertButtonVariantKanji display="其ノ他" variants={VARIANTS.map(({traditional, simplified}) => [simplified, traditional])} selection={editor.selectedText} />
 			</div>
 		</div>
 	</FloatDialog>
