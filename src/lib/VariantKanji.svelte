@@ -9,6 +9,7 @@ setContext("editor", editor);
 import InsertButtonVariantKanji from "./buttons/InsertButtonVariantKanji.svelte";
 import type { Color } from "$lib/color";
 import { preferences } from "./preferences.svelte";
+import { segment } from "./string";
 
 let shown = $state(false);
 
@@ -70,6 +71,16 @@ $effect(() => {
 $effect(() => {
 	editor.toggleClass("display-variant-highlight", preferences.highlight);
 });
+
+let selectedVariants = $derived(
+	[
+		...[...Object.values(GROUPED_VARIANTS)].flat(),
+		...VARIANTS.map(({ traditional, simplified }) => [simplified, traditional]),
+	]
+		.filter(([key, variants]) => segment(editor.selectedText).includes(key))
+		.map(([key, variants]) => [key, selectVariant(variants[0], variants[1])])
+		.filter(([_, variant]) => variant) as [string, string][],
+);
 </script> 
 
 {#if shown}
@@ -91,6 +102,14 @@ $effect(() => {
 				{/each}
 				<InsertButtonVariantKanji display="其ノ他" variants={VARIANTS.map(({traditional, simplified}) => [simplified, traditional])} selection={editor.selectedText} />
 			</div>
+			{#if selectedVariants.length > 0}
+				<hr/>
+				<div class="panel">
+					{#each selectedVariants as [key, variant]}
+						<InsertButton color="orange" display={`${key}→${variant}`} text={variant} title={`「${key}」の異體字`} />
+					{/each}
+				</div>
+			{/if}
 		</div>
 	</FloatDialog>
 {:else}
@@ -160,5 +179,11 @@ $effect(() => {
 		align-items: center;
 		justify-content: center;
 		gap: 0.5em;
+	}
+
+	hr {
+		border: 1px solid #ccc;
+		margin: 0 0.5em;
+		height: 100%;
 	}
 </style>

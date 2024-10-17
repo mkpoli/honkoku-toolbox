@@ -77,4 +77,8 @@ const editor = getContext<Editor>("editor");
   [data-color='gray'] {
     color: #888888;
   }
+
+  [data-color='orange'] {
+    color: #ff9500;
+  }
 </style>

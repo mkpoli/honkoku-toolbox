@@ -5,5 +5,6 @@ export const COLORS = [
 	"red",
 	"pink",
 	"gray",
+	"orange",
 ] as const;
 export type Color = (typeof COLORS)[number];
