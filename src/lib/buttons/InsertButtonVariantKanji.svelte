@@ -69,6 +69,8 @@ const editor = getContext<Editor>("editor");
 
     background-color: #ffffff85;
     backdrop-filter: blur(10px);
+
+    font-family: 'Jigmo', 'Jigmo2', 'Jigmo3', 'HanaMinA', 'HanaMinB', serif;
   }
 
   button:hover {
