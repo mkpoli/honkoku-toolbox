@@ -29,7 +29,7 @@ export default defineConfig({
 				icon: ICON_URL,
 				namespace: "https://mkpo.li/",
 				match: [
-					"https://honkoku.org/app/",
+					"https://honkoku.org/app/*",
 					"https://ja.wikisource.org/w/index.php?title=*&action=*",
 				],
 				license: "MIT",
