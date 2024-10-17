@@ -106,11 +106,6 @@ $effect(() => {
         <div class="panel">
           <h3>註釋</h3>
           <InsertButton color="pink" text={(t) => `／${t}（）`} display="ルビー" />
-          <InsertButton color="green" text="。" title="句点" />
-          <InsertButton color="green" text="-" title="ハイフン" />
-          <InsertButton color="green" text=" " display="␣" title="半角スペース" />
-          <InsertButton color="green" text="　" display="▢" title="全角スペース" />
-          <InsertButton color="green" text="◯" title="全角丸" />
           <InsertButton color="blue" text={(t) => `《割書：${t}｜》`} display="割注" />
           <InsertButton color="red" text={(t) => `【${t}】`} display="注釈" />
         </div>
@@ -135,6 +130,18 @@ $effect(() => {
           <InsertButton color="green" text={(t) => `{{分註|${t}|}}`} display="分註" title="分註（割註）" />
         </div>
       {/if}
+      <div class="panel">
+        <h3>記号</h3>
+        <InsertButton color="green" text="—" title="emダッシュ" />
+        <InsertButton color="green" text="…" title="省略号" />
+        <InsertButton color="green" text="、" title="読点" />
+        <InsertButton color="green" text="，" title="カンマ" />
+        <InsertButton color="green" text="。" title="句点" />
+        <InsertButton color="green" text="-" title="ハイフン" />
+        <InsertButton color="green" text=" " display="␣" title="半角スペース" />
+        <InsertButton color="green" text="　" display="▢" title="全角スペース" />
+        <InsertButton color="green" text="◯" title="全角丸" />
+      </div>
       <div class="panel">
         <h3>踊字</h3>
         <InsertButton color="green" text="々" title="同の字点" />
