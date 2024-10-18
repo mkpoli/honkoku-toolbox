@@ -15,7 +15,6 @@ let shown = $state(false);
 
 const VARIANTS: { traditional: string; simplified: string; color: Color }[] = [
 	{ traditional: "敎", simplified: "教", color: "blue" },
-	{ traditional: "內", simplified: "内", color: "pink" },
 ];
 
 /**
