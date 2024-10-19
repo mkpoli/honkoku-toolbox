@@ -43,6 +43,7 @@ setTimeout(() => {
 				if (wrappers.length > 0) {
 					kojiWrapper = wrappers[0] as HTMLDivElement;
 					editor = new KojiEditor(kojiWrapper);
+					console.log("[honkoku-toolbox] KojiEditor initialized: ", editor);
 					clearInterval(interval);
 				}
 				if (retries > MAX_RETRIES) {
@@ -52,6 +53,7 @@ setTimeout(() => {
 			}, 500);
 		} else {
 			editor = new KojiEditor(kojiWrapper);
+			console.log("[honkoku-toolbox] KojiEditor initialized: ", editor);
 		}
 		return;
 	}
@@ -65,6 +67,7 @@ setTimeout(() => {
 			};
 			cm = codeMirror.CodeMirror;
 			editor = new CodeMirrorEditor(cm);
+			console.info("[honkoku-toolbox] CodeMirrorEditor initialized: ", editor);
 		} else {
 			let retries = 0;
 			const interval = setInterval(() => {
@@ -75,7 +78,13 @@ setTimeout(() => {
 					};
 					cm = codeMirror.CodeMirror;
 					editor = new CodeMirrorEditor(cm);
+					console.info("[honkoku-toolbox] CodeMirrorEditor initialized: ", editor);
 					clearInterval(interval);
+				} else {
+					if (retries > MAX_RETRIES) {
+						clearInterval(interval)
+					}
+					retries++;
 				}
 			}, 500);
 		}
