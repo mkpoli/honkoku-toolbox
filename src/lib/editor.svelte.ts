@@ -123,6 +123,10 @@ export class KojiEditor extends Editor {
 export class CodeMirrorEditor extends Editor {
 	constructor(private codeMirror: CodeMirror.Editor) {
 		super();
+
+		if (!codeMirror) {
+			throw new Error("[honkoku-toolbox] CodeMirrorEditor is not valid");
+		}
 		this.codeMirror = codeMirror;
 
 		this.codeMirror.on("cursorActivity", () => {
