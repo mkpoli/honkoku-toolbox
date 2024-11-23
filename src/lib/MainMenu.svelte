@@ -123,6 +123,13 @@ $effect(() => {
           <InsertButton color="green" text={(t) => `{{傍点|style=open double-circle|${t}}}`} display="◎" title="傍点（白二重丸）" />
           <InsertButton color="green" text={(t) => `{{傍点|style=filled triangle|${t}}}`} display="▲" title="傍点（黒三角）" />
           <InsertButton color="green" text={(t) => `{{傍点|style=open triangle|${t}}}`} display="△" title="傍点（白三角）" />
+          <h3>傍線</h3>
+          <InsertButton color="green" text={(t) => `{{傍線|${t}}}`} display="" title="傍線">
+            <span style="text-decoration: underline; text-underline-position: right;">　</span>
+          </InsertButton>
+          <InsertButton color="green" text={(t) => `{{二重線|${t}}}`} display="" title="傍線（二重）">
+            <span style="text-decoration: underline double; text-underline-position: right;">　</span>
+          </InsertButton>
           <h3>ルビー</h3>
           <InsertButton color="pink" text={(t) => `{{ruby|${t}|}}`} display="ルビ" />
           <h3>註釋</h3>

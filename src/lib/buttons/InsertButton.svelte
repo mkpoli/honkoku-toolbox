@@ -1,5 +1,5 @@
 <script lang="ts">
-import { getContext } from "svelte";
+import { getContext, type Snippet } from "svelte";
 import type { Editor } from "$lib/editor.svelte";
 import type { Color } from "$lib/color";
 
@@ -8,12 +8,14 @@ let {
 	text,
 	display = text instanceof Function ? text("…") : text,
 	title,
+	children,
 	oncontextmenu,
 }: {
 	color?: Color;
 	text: string | ((orig: string) => string);
 	display?: string;
 	title?: string;
+	children?: Snippet<[]>;
 	oncontextmenu?: (e: MouseEvent) => void;
 } = $props();
 
@@ -34,8 +36,8 @@ const editor = getContext<Editor>("editor");
     }
   }}
   {oncontextmenu}
->{display}</button
->
+>{display}{@render children?.()}
+</button>
 
 <style>
   button {
