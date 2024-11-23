@@ -30,7 +30,8 @@ export default defineConfig({
 				namespace: "https://mkpo.li/",
 				match: [
 					"https://honkoku.org/app/*",
-					"https://ja.wikisource.org/w/index.php?title=*&action=*",
+					// "https://ja.wikisource.org/w/index.php?title=*&action=*",
+					"https://ja.wikisource.org/*",
 				],
 				license: "MIT",
 				grant: ["GM.setValue", "GM.getValue"],
